@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, SkipBack, SkipForward } from "lucide-react";
 
 const ICON_MOTION = {
   initial: { opacity: 0, scale: 0.5, filter: "blur(4px)" },
@@ -10,19 +10,41 @@ const ICON_MOTION = {
   transition: { duration: 0.1 },
 } as const;
 
+const SECONDARY =
+  "bg-foreground/10 hover:bg-foreground/20 flex h-12 w-12 items-center justify-center rounded-full transition-colors disabled:opacity-40";
+
 export function TimerControls({
   running,
   disabled,
+  showSkip,
   onToggle,
   onReset,
+  onPrevious,
+  onNext,
 }: {
   running: boolean;
   disabled?: boolean;
+  /** Mostra precedente/successiva (solo con più fasi). */
+  showSkip?: boolean;
   onToggle: () => void;
   onReset: () => void;
+  onPrevious: () => void;
+  onNext: () => void;
 }) {
   return (
     <div className="flex w-fit items-center gap-3">
+      {showSkip && (
+        <button
+          type="button"
+          aria-label="Fase precedente"
+          disabled={disabled}
+          onClick={onPrevious}
+          className={SECONDARY}
+        >
+          <SkipBack className="size-5" />
+        </button>
+      )}
+
       <motion.button
         type="button"
         aria-label={running ? "Metti in pausa" : "Avvia"}
@@ -58,12 +80,24 @@ export function TimerControls({
         </AnimatePresence>
       </motion.button>
 
+      {showSkip && (
+        <button
+          type="button"
+          aria-label="Fase successiva"
+          disabled={disabled}
+          onClick={onNext}
+          className={SECONDARY}
+        >
+          <SkipForward className="size-5" />
+        </button>
+      )}
+
       <button
         type="button"
         aria-label="Azzera"
         disabled={disabled}
         onClick={onReset}
-        className="bg-foreground/10 hover:bg-foreground/20 flex h-12 w-12 items-center justify-center rounded-full text-[#ff3828] transition-colors disabled:opacity-40"
+        className={`${SECONDARY} text-[#ff3828]`}
       >
         <Plus className="rotate-45" />
       </button>

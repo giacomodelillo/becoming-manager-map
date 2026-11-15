@@ -1,12 +1,15 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ShellProvider, useShell } from "./shell-context";
 import { MainStage } from "./main-stage";
 import { DetailPanel } from "./detail-panel";
 import { FloatingToolbar } from "./floating-toolbar";
+import { cn } from "@/lib/utils";
+import { DetailBackdrop } from "./detail-backdrop";
+import { DetailPeek } from "./detail-peek";
 
 export type AppShellProps = {
   /** Stage: la sezione principale arrotondata */
@@ -15,7 +18,15 @@ export type AppShellProps = {
   detail: ReactNode;
 };
 
-export function AppShell({ children, detail }: AppShellProps) {
+export function AppShell(props: AppShellProps) {
+  return (
+    <Suspense fallback={null}>
+      <AppShellInner {...props} />
+    </Suspense>
+  );
+}
+
+function AppShellInner({ children, detail }: AppShellProps) {
   const pathname = usePathname();
 
   return (
@@ -28,10 +39,16 @@ export function AppShell({ children, detail }: AppShellProps) {
 }
 
 function ShellFrame({ children, detail }: AppShellProps) {
-  const { detailOpen } = useShell();
+  const { detailOpen, sheetOpen } = useShell();
 
   return (
-    <div className="bg-background text-foreground h-dvh w-full overflow-y-auto lg:overflow-hidden">
+    <div
+      className={cn(
+        "bg-background text-foreground h-dvh w-full overflow-y-auto lg:overflow-hidden",
+        // con il pannello aperto su mobile la pagina dietro non scorre
+        sheetOpen && "max-lg:overflow-hidden",
+      )}
+    >
       <FloatingToolbar />
 
       <div
@@ -41,6 +58,9 @@ function ShellFrame({ children, detail }: AppShellProps) {
         <DetailPanel>{detail}</DetailPanel>
         <MainStage>{children}</MainStage>
       </div>
+
+      <DetailBackdrop />
+      <DetailPeek />
     </div>
   );
 }

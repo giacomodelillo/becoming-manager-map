@@ -20,8 +20,9 @@ export function CountdownDisplay({
       role="timer"
       aria-live="off"
       className={cn(
-        // cqw: la dimensione segue la larghezza dello stage, con o senza pannello dettaglio
-        "font-display flex items-center justify-center text-[32cqw] leading-none tracking-tight transition-colors duration-300",
+        // dimensione = il minore tra larghezza dello stage (cqw) e altezza della finestra (dvh):
+        // a schermo intero non spinge più i comandi fuori dallo schermo
+        "font-display flex items-center justify-center text-[length:min(32cqw,34dvh)] leading-none tracking-tight transition-colors duration-300",
         isFinished && "animate-pulse text-[#ff3828]",
       )}
     >

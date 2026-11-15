@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { formatClock } from "@/lib/timer/logic";
+import { formatClock, getTotalMs } from "@/lib/timer/logic";
+import { SequenceEditor } from "./sequence-editor";
 import { useTimerState } from "./use-timer";
 
 const PRESETS_MIN = [1, 5, 10, 15, 30];
@@ -21,7 +22,7 @@ const STATUS_LABEL = {
 } as const;
 
 const INPUT =
-  "bg-foreground/5 border-foreground/10 focus:border-foreground/40 h-9 w-20 rounded-xl border px-3 text-sm outline-none";
+  "bg-foreground/5 border-foreground/10 focus:border-foreground/40 h-10 w-20 rounded-xl border px-3 text-base outline-none sm:h-9 sm:text-sm";
 
 export function TimerSettings() {
   const { state, clients, connection, setDuration, adjust } = useTimerState();
@@ -40,7 +41,7 @@ export function TimerSettings() {
   return (
     <div className="space-y-10">
       <div className="space-y-3">
-        <h3 className="text-foreground/50 text-sm">Imposta la durata</h3>
+        <h3 className="text-foreground/50 text-sm">Timer singolo</h3>
         <div className="flex flex-wrap gap-2">
           {PRESETS_MIN.map((m) => (
             <Button
@@ -83,9 +84,11 @@ export function TimerSettings() {
           </Button>
         </div>
         <p className="text-foreground/50 text-sm">
-          Impostare una nuova durata azzera il timer.
+          Sostituisce l&apos;eventuale sequenza e azzera il timer.
         </p>
       </div>
+
+      <SequenceEditor />
 
       <div className="space-y-3">
         <h3 className="text-foreground/50 text-sm">Regola il tempo</h3>
@@ -102,7 +105,7 @@ export function TimerSettings() {
           ))}
         </div>
         <p className="text-foreground/50 text-sm">
-          Cambia la durata anche mentre il timer è in corso.
+          Cambia la durata della fase in corso, anche a timer avviato.
         </p>
       </div>
 
@@ -110,7 +113,8 @@ export function TimerSettings() {
         <tbody>
           {[
             ["Stato", STATUS_LABEL[state.status]],
-            ["Durata", formatClock(state.durationMs)],
+            ["Durata totale", formatClock(getTotalMs(state.segments))],
+            ["Fasi", String(state.segments.length)],
             ["Dispositivi collegati", String(clients)],
           ].map(([label, value]) => (
             <tr

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Geist, Geist_Mono } from "next/font/google";
 import { AppShell } from "@/components/shell/app-shell";
 import "./globals.css";
@@ -21,6 +21,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Horizon",
   description: "Horizon",
+};
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children, detail }: LayoutProps<"/">) {

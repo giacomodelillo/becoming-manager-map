@@ -12,9 +12,10 @@ export function TimerDetail() {
         <div className="space-y-4">
           <h2 className="text-3xl font-medium tracking-tighter">Timer</h2>
           <p className="text-foreground/70 max-w-xl leading-relaxed">
-            Un unico conto alla rovescia condiviso: avvio, pausa, azzeramento e
-            modifiche si vedono su tutti i dispositivi collegati alla stessa
-            rete, e da ognuno si possono comandare.
+            Un unico conto alla rovescia condiviso, singolo o a fasi in sequenza:
+            avvio, pausa, azzeramento e modifiche si vedono su tutti i
+            dispositivi collegati alla stessa rete, e da ognuno si possono
+            comandare.
           </p>
         </div>
 

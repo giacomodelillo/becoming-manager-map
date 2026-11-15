@@ -1,0 +1,188 @@
+/* ===== Becoming Manager: mappa piatta e squadrata ===== */
+
+.expo-map,
+.expo-brand {
+  --ink: #11071f;
+  --paper: #f5f5f5;
+  --gold: #f5c84c;
+  --magenta: #d43d74;
+  --gray: #7a7a7a;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+}
+.expo-map { background: var(--paper); color: var(--ink); }
+.expo-serif { font-family: var(--font-didot), Georgia, serif; font-weight: 400; }
+.expo-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@keyframes expo-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes expo-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes expo-drop {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* colori delle zone: palette del brand */
+.expo-tone { --tone: #f5c84c; --tone-deep: #b8902a; }
+.expo-tone[data-tone="magenta"] { --tone: #d43d74; --tone-deep: #8f2552; }
+.expo-tone[data-tone="gray"] { --tone: #7a7a7a; --tone-deep: #4a4a4a; }
+
+/* zona: rettangolo piatto con bordo inferiore "estruso" */
+.expo-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background: color-mix(in srgb, var(--tone) 26%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--tone) 70%, transparent);
+  box-shadow: 0 5px 0 var(--tone-deep);
+  animation: expo-rise 0.45s ease var(--d, 0ms) backwards;
+}
+.expo-zone-label {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  white-space: nowrap;
+  color: var(--gray);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* booth */
+.expo-pod {
+  position: relative;
+  display: flex;
+  width: 128px;
+  height: 72px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  user-select: none;
+  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  box-shadow: 0 3px 0 var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.2s, border-color 0.2s, opacity 0.2s;
+  animation: expo-rise 0.4s ease var(--d, 0ms) backwards;
+}
+.expo-pod:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
+.expo-pod-num {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-didot), Georgia, serif;
+  font-size: 20px;
+  line-height: 1;
+}
+.expo-pod-name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.expo-pod-step {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  display: flex;
+  min-width: 24px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  background: var(--magenta);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+.expo-pod[data-state="route"] { border: 2px solid var(--magenta); }
+.expo-pod[data-state="visited"] { opacity: 0.5; }
+.expo-pod[data-state="visited"] .expo-pod-num { background: var(--gray); }
+.expo-pod[data-state="visited"] .expo-pod-step { background: var(--gray); }
+.expo-pod[data-state="current"] {
+  z-index: 5;
+  background: var(--gold);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 var(--ink);
+}
+.expo-pod[data-state="current"]:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
+.expo-pod[data-state="current"] .expo-pod-step { background: var(--ink); color: var(--gold); }
+.expo-pod[aria-current="page"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* spillo del passo corrente */
+.expo-pin {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  margin-left: -14px;
+  pointer-events: none;
+  animation: expo-drop 0.4s ease-out backwards;
+}
+
+/* frecce di flusso: linee sottili, il tratto del percorso si disegna una volta */
+.expo-link { color: var(--gray); overflow: visible; }
+.expo-link-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.expo-link-head {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: miter;
+}
+.expo-link[data-active="true"] { color: var(--magenta); }
+.expo-link[data-active="true"] .expo-link-line {
+  stroke-width: 2.5;
+  stroke-dasharray: 1;
+  animation: expo-draw 0.6s ease-out both;
+}
+.expo-link[data-active="true"] .expo-link-head { stroke-width: 2.5; }
+
+/* timer e ingresso: blocchi pieni, come le "ancore" della mappa di riferimento */
+.expo-landmark {
+  display: flex;
+  width: 100%;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--ink) 45%, var(--gray));
+  animation: expo-rise 0.45s ease backwards;
+}
+.expo-landmark svg { color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  .expo-zone, .expo-pod, .expo-pin, .expo-landmark, .expo-link-line { animation: none !important; }
+}
