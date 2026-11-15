@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { companies } from "@/lib/expo/data";
+import { useFairView } from "@/lib/expo/data-store";
 import { useExpoRoute } from "./use-expo-route";
 
 /** Tutte le aziende in ordine di booth: tocca per aprire la scheda. */
 export function CompanyList() {
   const { openBooth } = useExpoRoute();
-  const sorted = [...companies].sort((a, b) => a.id - b.id);
+  const sorted = useFairView()?.companies ?? [];
 
   return (
     <section aria-labelledby="companies-title" className="space-y-3">

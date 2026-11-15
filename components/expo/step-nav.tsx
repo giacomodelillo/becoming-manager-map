@@ -3,15 +3,16 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getCompany } from "@/lib/expo/data";
+import { useFairView } from "@/lib/expo/data-store";
 import { useExpoRoute } from "./use-expo-route";
 
 /** Indietro / avanti tra i passi. `compact` = barra chiara sopra la mappa, altrimenti scura nel dettaglio. */
 export function StepNav({ compact = false }: { compact?: boolean }) {
   const { route, stepIndex, currentBoothId, goToStep } = useExpoRoute();
+  const view = useFairView();
   if (!route || currentBoothId === null) return null;
 
-  const company = getCompany(currentBoothId);
+  const company = view?.byId.get(currentBoothId);
   const isFirst = stepIndex === 0;
   const isLast = stepIndex === route.length - 1;
 

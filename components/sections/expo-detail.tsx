@@ -1,9 +1,11 @@
+import Link from "next/link";
 import { CompanyList } from "@/components/expo/company-list";
 import { MapLegend } from "@/components/expo/map-legend";
 import { RouteList } from "@/components/expo/route-list";
 import { StepNav } from "@/components/expo/step-nav";
 import { StudentPicker } from "@/components/expo/student-picker";
 import { expoFontVars } from "@/lib/expo/fonts";
+import { KIOSK } from "@/lib/expo/kiosk";
 
 export function ExpoDetail() {
   return (
@@ -22,6 +24,17 @@ export function ExpoDetail() {
       <RouteList />
       <CompanyList />
       <MapLegend />
+      {/* sul totem l'area riservata non si raggiunge dal pannello */}
+      {!KIOSK && (
+        <footer className="border-t border-white/15 pt-4">
+          <Link
+            href="/admin"
+            className="inline-flex min-h-12 items-center text-xs font-semibold uppercase tracking-[0.18em] text-white/50 active:text-white"
+          >
+            Area riservata
+          </Link>
+        </footer>
+      )}
     </div>
   );
 }

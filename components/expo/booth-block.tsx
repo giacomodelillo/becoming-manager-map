@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { useRef, type CSSProperties, type MouseEvent, type PointerEvent } from "react";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import type { Company } from "@/lib/expo/types";
 
 type Props = {
   company: Company;
-  /** booth aperto nel dettaglio (URL) */
+  /** booth selezionato (URL nel pubblico, azienda aperta nel modulo in admin) */
   selected: boolean;
   /** indice 0-based nel percorso dello studente, null se non c'è percorso */
   step: number | null;
@@ -18,43 +18,69 @@ type Props = {
   /** ritardo dell'animazione di ingresso, in ms */
   delay: number;
   onOpen: (boothId: number) => void;
+  /** anteprima admin: bottone che non cambia pagina */
+  asButton?: boolean;
 };
 
 const DRAG_SLOP_PX = 8;
 
-export function BoothBlock({ company, selected, step, current, visited, delay, onOpen }: Props) {
+export function BoothBlock({
+  company,
+  selected,
+  step,
+  current,
+  visited,
+  delay,
+  onOpen,
+  asButton = false,
+}: Props) {
   const down = useRef<{ x: number; y: number } | null>(null);
   const state = current ? "current" : step === null ? "idle" : visited ? "visited" : "route";
 
-  return (
-    <Link
-      id={`booth-${company.id}`}
-      href={`/expo/${company.id}`}
-      draggable={false}
-      className="expo-pod"
-      data-state={state}
-      style={{ "--d": `${delay}ms` } as CSSProperties}
-      aria-label={`Booth ${company.id}: ${company.name}`}
-      aria-current={selected ? "page" : undefined}
-      onPointerDown={(e) => {
-        down.current = { x: e.clientX, y: e.clientY };
-      }}
-      onClick={(e) => {
-        const d = down.current;
-        // dopo un trascinamento della mappa non è un tap sul booth
-        if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > DRAG_SLOP_PX) {
-          e.preventDefault();
-          return;
-        }
-        onOpen(company.id);
-      }}
-    >
+  const shared = {
+    id: `booth-${company.id}`,
+    draggable: false,
+    className: "expo-pod",
+    "data-state": state,
+    style: { "--d": `${delay}ms` } as CSSProperties,
+    "aria-label": `Booth ${company.id}: ${company.name}`,
+    "aria-current": selected ? (asButton ? ("true" as const) : ("page" as const)) : undefined,
+    onPointerDown: (e: PointerEvent) => {
+      down.current = { x: e.clientX, y: e.clientY };
+    },
+  };
+
+  const handleClick = (e: MouseEvent) => {
+    const d = down.current;
+    // dopo un trascinamento della mappa non è un tap sul booth
+    if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > DRAG_SLOP_PX) {
+      e.preventDefault();
+      return;
+    }
+    onOpen(company.id);
+  };
+
+  const content = (
+    <>
       {current && (
         <MapPin aria-hidden strokeWidth={1.5} className="expo-pin size-7 fill-[#d43d74] text-[#11071f]" />
       )}
       <span className="expo-pod-num">{company.id}</span>
       <span className="expo-pod-name">{company.name}</span>
       {step !== null && <span className="expo-pod-step">{step + 1}°</span>}
+    </>
+  );
+
+  if (asButton) {
+    return (
+      <button type="button" {...shared} onClick={handleClick}>
+        {content}
+      </button>
+    );
+  }
+  return (
+    <Link href={`/expo/${company.id}`} {...shared} onClick={handleClick}>
+      {content}
     </Link>
   );
 }

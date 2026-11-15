@@ -2,12 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { boothIds } from "@/lib/expo/data";
+import { useFairView } from "@/lib/expo/data-store";
 import { useExpoRoute } from "./use-expo-route";
 
 /** Selettore touch 1..N: nessuna tastiera. Il numero scelto è il booth di partenza. */
 export function StudentPicker() {
   const { start, selectStudent, clearStudent } = useExpoRoute();
+  const boothIds = useFairView()?.boothIds ?? [];
 
   return (
     <section aria-labelledby="student-title" className="space-y-3">

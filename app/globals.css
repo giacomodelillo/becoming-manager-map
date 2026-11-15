@@ -4,13 +4,31 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  Becoming Manager: palette del brand
+    viola scuro  #11071F   sfondi e superfici ampie
+    bianco       #F5F5F5   testi e contrasto
+    giallo oro   #F5C84C   azione principale
+    magenta      #D43D74   accenti e dettagli
+    grigio       #7A7A7A   elementi neutri
+  Tipografia: Montserrat (testi), GFS Didot (titoli e numeri grandi).
+*/
+
 @theme inline {
+    /* colori del brand, usabili come bg-brand-gold, text-brand-ink, ... */
+    --color-brand-ink: #11071f;
+    --color-brand-paper: #f5f5f5;
+    --color-brand-gold: #f5c84c;
+    --color-brand-magenta: #d43d74;
+    --color-brand-gray: #7a7a7a;
+
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-display: var(--font-bebas-neue);
-    --font-sans: var(--font-geist-sans);
+    --font-sans: var(--font-montserrat);
+    --font-serif: var(--font-didot);
+    --font-display: var(--font-didot);
     --font-mono: var(--font-geist-mono);
-    --font-heading: var(--font-sans);
+    --font-heading: var(--font-didot);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,75 +68,78 @@
     --color-stage: var(--stage);
 }
 
+/* Variante chiara (non usata finché <html> ha la classe "dark") */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
-    --stage: oklch(0.965 0 0);
+    --background: #f5f5f5;
+    --foreground: #11071f;
+    --card: #ffffff;
+    --card-foreground: #11071f;
+    --popover: #ffffff;
+    --popover-foreground: #11071f;
+    --primary: #11071f;
+    --primary-foreground: #f5f5f5;
+    --secondary: #ebe8f0;
+    --secondary-foreground: #11071f;
+    --muted: #ebe8f0;
+    --muted-foreground: #7a7a7a;
+    --accent: #ebe8f0;
+    --accent-foreground: #11071f;
+    --destructive: #d43d74;
+    --border: rgb(17 7 31 / 14%);
+    --input: rgb(17 7 31 / 22%);
+    --ring: #d43d74;
+    --chart-1: #f5c84c;
+    --chart-2: #d43d74;
+    --chart-3: #7a7a7a;
+    --chart-4: #11071f;
+    --chart-5: #b8902a;
+    /* Angoli vivi: il linguaggio del brand è squadrato */
+    --radius: 0rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #11071f;
+    --sidebar-primary: #11071f;
+    --sidebar-primary-foreground: #f5f5f5;
+    --sidebar-accent: #ebe8f0;
+    --sidebar-accent-foreground: #11071f;
+    --sidebar-border: rgb(17 7 31 / 14%);
+    --sidebar-ring: #d43d74;
+    --stage: #ebe8f0;
 }
 
+/* Tema principale: viola scuro, bianco, oro */
 .dark {
-    --background: oklch(0.1 0 0);
-    --stage: oklch(0.18 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --background: #11071f;
+    --foreground: #f5f5f5;
+    --card: #1b0f2e;
+    --card-foreground: #f5f5f5;
+    --popover: #1b0f2e;
+    --popover-foreground: #f5f5f5;
+    --primary: #f5c84c;
+    --primary-foreground: #11071f;
+    --secondary: #261741;
+    --secondary-foreground: #f5f5f5;
+    --muted: #261741;
+    --muted-foreground: #a8a3b3;
+    --accent: #261741;
+    --accent-foreground: #f5f5f5;
+    --destructive: #d43d74;
+    --border: rgb(245 245 245 / 14%);
+    --input: rgb(245 245 245 / 20%);
+    --ring: #f5c84c;
+    --chart-1: #f5c84c;
+    --chart-2: #d43d74;
+    --chart-3: #7a7a7a;
+    --chart-4: #f5f5f5;
+    --chart-5: #b8902a;
+    --sidebar: #1b0f2e;
+    --sidebar-foreground: #f5f5f5;
+    --sidebar-primary: #f5c84c;
+    --sidebar-primary-foreground: #11071f;
+    --sidebar-accent: #261741;
+    --sidebar-accent-foreground: #f5f5f5;
+    --sidebar-border: rgb(245 245 245 / 14%);
+    --sidebar-ring: #f5c84c;
+    --stage: #1b0f2e;
 }
 
 @layer base {
@@ -130,5 +151,14 @@
     }
     html {
         @apply font-sans;
+    }
+    h1,
+    h2,
+    h3 {
+        @apply font-heading font-normal;
+    }
+    ::selection {
+        background: #f5c84c;
+        color: #11071f;
     }
 }

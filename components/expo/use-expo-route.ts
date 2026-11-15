@@ -3,19 +3,20 @@
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useShell } from "@/components/shell/shell-context";
-import { boothIds } from "@/lib/expo/data";
+import { useFairView } from "@/lib/expo/data-store";
 import { buildStudentRoute } from "@/lib/expo/route";
 import { expoStore, useExpoState } from "@/lib/expo/store";
 
 /** Percorso dello studente + azioni di navigazione. Usato da stage e dettaglio. */
 export function useExpoRoute() {
   const { start, stepIndex: rawStep } = useExpoState();
+  const view = useFairView();
   const router = useRouter();
   const { openDetail, setDetailOpen } = useShell();
 
   const route = useMemo(
-    () => (start === null ? null : buildStudentRoute(boothIds, start)),
-    [start],
+    () => (start === null || !view ? null : buildStudentRoute(view.boothIds, start)),
+    [start, view],
   );
   const total = route?.length ?? 0;
   const stepIndex = route ? Math.min(Math.max(rawStep, 0), total - 1) : -1;
@@ -41,20 +42,19 @@ export function useExpoRoute() {
     [route, visit],
   );
 
+  // Scegliere il proprio numero imposta solo il percorso: nessuna azienda viene
+  // selezionata, nessuna navigazione, il pannello dettaglio resta com'è.
   const selectStudent = useCallback(
     (n: number) => {
-      const r = buildStudentRoute(boothIds, n);
-      if (!r) return;
+      if (!view || !view.boothIds.includes(n)) return;
       expoStore.selectStudent(n);
-      visit(r[0], 0);
     },
-    [visit],
+    [view],
   );
 
   const clearStudent = useCallback(() => {
     expoStore.clearStudent();
-    router.push("/expo");
-  }, [router]);
+  }, []);
 
   // Tap su un booth/azienda: la navigazione la fa il <Link>, qui stato e dettaglio
   const openBooth = useCallback(

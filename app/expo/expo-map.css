@@ -131,7 +131,7 @@
 }
 .expo-pod[data-state="current"]:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
 .expo-pod[data-state="current"] .expo-pod-step { background: var(--ink); color: var(--gold); }
-.expo-pod[aria-current="page"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+.expo-pod[aria-current] { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 /* spillo del passo corrente */
 .expo-pin {

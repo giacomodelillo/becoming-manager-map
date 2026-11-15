@@ -1,13 +1,9 @@
 import { Suspense } from "react";
-import { notFound } from "next/navigation";
 import { BoothDetail } from "@/components/sections/booth-detail";
-import { getCompany } from "@/lib/expo/data";
 
 async function Content({ params }: { params: Promise<{ boothId: string }> }) {
   const { boothId } = await params;
-  const company = getCompany(Number(boothId));
-  if (!company) notFound();
-  return <BoothDetail company={company} />;
+  return <BoothDetail boothId={Number(boothId)} />;
 }
 
 export default function Page({ params }: { params: Promise<{ boothId: string }> }) {

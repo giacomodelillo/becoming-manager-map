@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { CompanyCard } from "@/components/expo/company-card";
+import { BoothDetailBody } from "@/components/expo/booth-detail-body";
 import { StepNav } from "@/components/expo/step-nav";
 import { expoFontVars } from "@/lib/expo/fonts";
-import type { Company } from "@/lib/expo/types";
 
-export function BoothDetail({ company }: { company: Company }) {
+export function BoothDetail({ boothId }: { boothId: number }) {
   return (
     <div
       className={`${expoFontVars} expo-brand min-h-full space-y-8 bg-[var(--ink)] px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-6 text-[var(--paper)] lg:pt-28`}
@@ -17,7 +16,7 @@ export function BoothDetail({ company }: { company: Company }) {
         <ArrowLeft className="size-4" strokeWidth={1.5} aria-hidden />
         Tutte le aziende
       </Link>
-      <CompanyCard company={company} />
+      <BoothDetailBody boothId={boothId} />
       <StepNav />
     </div>
   );

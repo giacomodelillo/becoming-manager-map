@@ -1,12 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { getCompany } from "@/lib/expo/data";
+import { useFairView } from "@/lib/expo/data-store";
 import { useExpoRoute } from "./use-expo-route";
 
 /** Elenco dei passi (1°, 2°, ...) del percorso studente; toccando un passo si salta lì. */
 export function RouteList() {
   const { route, stepIndex, goToStep } = useExpoRoute();
+  const view = useFairView();
   if (!route) return null;
 
   return (
@@ -19,7 +20,7 @@ export function RouteList() {
       </div>
       <ol className="space-y-2">
         {route.map((id, i) => {
-          const company = getCompany(id);
+          const company = view?.byId.get(id);
           const current = i === stepIndex;
           return (
             <li key={id}>

@@ -1,17 +1,23 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { TransformComponent, TransformWrapper, useControls } from "react-zoom-pan-pinch";
 import { cn } from "@/lib/utils";
-import { FlowMap } from "./flow-map";
-import { FocusOnStep } from "./focus-on-step";
 import { MapControls } from "./map-controls";
-import { StepControls } from "./step-controls";
 
 const DESKTOP = "(min-width: 1024px)";
 const SIDE_PAD = 16;
 
-function Viewport({ selectedId }: { selectedId: number | null }) {
+type Props = {
+  /** La mappa da mostrare (dentro zoom/pan) */
+  children: ReactNode;
+  /** Elementi fissi sopra la mappa, dentro il contesto di zoom (es. barra passi) */
+  overlay?: ReactNode;
+  /** La mappa si riadatta al contenitore quando questo valore cambia */
+  refitKey?: string;
+};
+
+function Viewport({ children, overlay, refitKey }: Props) {
   const controls = useControls();
   const controlsRef = useRef(controls);
   useEffect(() => {
@@ -58,6 +64,12 @@ function Viewport({ selectedId }: { selectedId: number | null }) {
     return () => observer.disconnect();
   }, [fit]);
 
+  // ...e quando cambia la forma della mappa (aree o booth aggiunti/tolti)
+  useEffect(() => {
+    const id = requestAnimationFrame(() => fit(0));
+    return () => cancelAnimationFrame(id);
+  }, [refitKey, fit]);
+
   return (
     <div
       ref={containerRef}
@@ -67,18 +79,15 @@ function Viewport({ selectedId }: { selectedId: number | null }) {
       )}
     >
       <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
-        <div ref={contentRef}>
-          <FlowMap selectedId={selectedId} />
-        </div>
+        <div ref={contentRef}>{children}</div>
       </TransformComponent>
       <MapControls onFit={() => fit(300)} />
-      <StepControls />
-      <FocusOnStep />
+      {overlay}
     </div>
   );
 }
 
-export function MapCanvas({ selectedId }: { selectedId: number | null }) {
+export function MapCanvas(props: Props) {
   return (
     <TransformWrapper
       initialScale={1}
@@ -89,7 +98,7 @@ export function MapCanvas({ selectedId }: { selectedId: number | null }) {
       wheel={{ step: 0.08 }}
       panning={{ velocityDisabled: true }}
     >
-      <Viewport selectedId={selectedId} />
+      <Viewport {...props} />
     </TransformWrapper>
   );
 }

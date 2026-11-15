@@ -2,9 +2,9 @@
 
 import { Fragment, type CSSProperties } from "react";
 import { DoorOpen, Timer } from "lucide-react";
-import { fairLayout, getCompany } from "@/lib/expo/data";
+import { useFairData } from "@/lib/expo/data-store";
 import { routeHasEdge } from "@/lib/expo/route";
-import type { FairColumn, ZoneTone } from "@/lib/expo/types";
+import type { FairColumn, FairView, ZoneTone } from "@/lib/expo/types";
 import { BoothBlock } from "./booth-block";
 import { FlowLink } from "./flow-link";
 import { useExpoRoute } from "./use-expo-route";
@@ -12,16 +12,24 @@ import { useExpoRoute } from "./use-expo-route";
 const TONES: ZoneTone[] = ["gold", "magenta", "gray"];
 const toneOf = (col: FairColumn, index: number): ZoneTone => col.tone ?? TONES[index % TONES.length];
 
+export type FlowMapViewProps = {
+  view: FairView;
+  selectedId: number | null;
+  /** percorso dello studente (null = nessuno) */
+  route: number[] | null;
+  stepIndex: number;
+  currentBoothId: number | null;
+  onOpen: (boothId: number) => void;
+  /** anteprima admin: i booth sono bottoni */
+  asButtons?: boolean;
+};
+
 function Zone({
   col,
   index,
-  selectedId,
-}: {
-  col: FairColumn;
-  index: number;
-  selectedId: number | null;
-}) {
-  const { route, stepIndex, currentBoothId, openBooth } = useExpoRoute();
+  ...map
+}: { col: FairColumn; index: number } & FlowMapViewProps) {
+  const { view, selectedId, route, stepIndex, currentBoothId, onOpen, asButtons } = map;
   // dall'alto in basso: "up" mostra l'ultimo booth in cima
   const visual = col.direction === "up" ? [...col.booths].reverse() : col.booths;
 
@@ -36,7 +44,7 @@ function Zone({
     >
       {col.label && <span className="expo-zone-label">{col.label}</span>}
       {visual.map((id, i) => {
-        const company = getCompany(id);
+        const company = view.byId.get(id);
         if (!company) return null;
         const step = route ? route.indexOf(id) : -1;
         const [from, to] =
@@ -51,7 +59,8 @@ function Zone({
               current={currentBoothId === id}
               visited={step !== -1 && step < stepIndex}
               delay={150 + (index * col.booths.length + col.booths.indexOf(id)) * 40}
-              onOpen={openBooth}
+              onOpen={onOpen}
+              asButton={asButtons}
             />
           </Fragment>
         );
@@ -60,10 +69,10 @@ function Zone({
   );
 }
 
-/** Schema squadrato: Timer in alto, zone con booth e frecce di flusso, Ingresso in basso. */
-export function FlowMap({ selectedId }: { selectedId: number | null }) {
-  const { route } = useExpoRoute();
-  const { columns, timerLabel, entranceLabel } = fairLayout;
+/** Schema squadrato: Timer in alto, zone con booth e frecce di flusso, Ingresso in basso. Solo grafica. */
+export function FlowMapView(props: FlowMapViewProps) {
+  const { view, route } = props;
+  const { columns, timerLabel, entranceLabel } = view.layout;
 
   return (
     <div className="flex w-max flex-col items-start gap-10 p-12">
@@ -80,7 +89,7 @@ export function FlowMap({ selectedId }: { selectedId: number | null }) {
             : false;
           return (
             <Fragment key={col.id}>
-              <Zone col={col} index={ci} selectedId={selectedId} />
+              <Zone col={col} index={ci} {...props} />
               {next && (
                 <div
                   className={`flex h-[72px] w-14 items-center justify-center ${
@@ -103,5 +112,29 @@ export function FlowMap({ selectedId }: { selectedId: number | null }) {
         </div>
       </div>
     </div>
+  );
+}
+
+/** Mappa pubblica: dati dal server + percorso dello studente. */
+export function FlowMap({ selectedId }: { selectedId: number | null }) {
+  const { route, stepIndex, currentBoothId, openBooth } = useExpoRoute();
+  const { view, status } = useFairData();
+
+  if (!view) {
+    return (
+      <p className="p-12 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--gray)]">
+        {status === "error" ? "Mappa non disponibile. Riprovo tra poco…" : "Caricamento mappa…"}
+      </p>
+    );
+  }
+  return (
+    <FlowMapView
+      view={view}
+      selectedId={selectedId}
+      route={route}
+      stepIndex={stepIndex}
+      currentBoothId={currentBoothId}
+      onOpen={openBooth}
+    />
   );
 }
