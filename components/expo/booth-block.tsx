@@ -35,15 +35,38 @@ export function BoothBlock({
   asButton = false,
 }: Props) {
   const down = useRef<{ x: number; y: number } | null>(null);
-  const state = current ? "current" : step === null ? "idle" : visited ? "visited" : "route";
+  const absent = company.hidden === true;
+  const state = absent ? "absent" : current ? "current" : step === null ? "idle" : visited ? "visited" : "route";
+  const style = { "--d": `${delay}ms` } as CSSProperties;
+  const label = `Booth ${company.id}: ${company.name}${absent ? " (assente)" : ""}`;
+
+  const content = (
+    <>
+      {current && (
+        <MapPin aria-hidden strokeWidth={1.5} className="expo-pin size-7 fill-[#d43d74] text-[#11071f]" />
+      )}
+      <span className="expo-pod-num">{company.id}</span>
+      <span className="expo-pod-name">{company.name}</span>
+      {step !== null && !absent && <span className="expo-pod-step">{step + 1}°</span>}
+    </>
+  );
+
+  // Nel pubblico un'azienda assente non è toccabile: resta solo il segnaposto
+  if (absent && !asButton) {
+    return (
+      <div id={`booth-${company.id}`} className="expo-pod" data-state="absent" style={style} aria-label={label}>
+        {content}
+      </div>
+    );
+  }
 
   const shared = {
     id: `booth-${company.id}`,
     draggable: false,
     className: "expo-pod",
     "data-state": state,
-    style: { "--d": `${delay}ms` } as CSSProperties,
-    "aria-label": `Booth ${company.id}: ${company.name}`,
+    style,
+    "aria-label": label,
     "aria-current": selected ? (asButton ? ("true" as const) : ("page" as const)) : undefined,
     onPointerDown: (e: PointerEvent) => {
       down.current = { x: e.clientX, y: e.clientY };
@@ -59,17 +82,6 @@ export function BoothBlock({
     }
     onOpen(company.id);
   };
-
-  const content = (
-    <>
-      {current && (
-        <MapPin aria-hidden strokeWidth={1.5} className="expo-pin size-7 fill-[#d43d74] text-[#11071f]" />
-      )}
-      <span className="expo-pod-num">{company.id}</span>
-      <span className="expo-pod-name">{company.name}</span>
-      {step !== null && <span className="expo-pod-step">{step + 1}°</span>}
-    </>
-  );
 
   if (asButton) {
     return (

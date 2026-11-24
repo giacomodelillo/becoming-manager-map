@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { connection, NextResponse, type NextRequest } from "next/server";
-import { COOKIE_NAME, isAdminToken } from "@/lib/expo/server/auth";
+import { adminEnabled, COOKIE_NAME, isAdminToken } from "@/lib/expo/server/auth";
 import { readFair, VersionConflictError, writeFair } from "@/lib/expo/server/store";
 import { parseFairConfig } from "@/lib/expo/validate";
 
@@ -14,6 +14,9 @@ export async function GET() {
 
 /** Solo con la sessione dell'area riservata. */
 export async function PUT(request: NextRequest) {
+  if (!adminEnabled()) {
+    return NextResponse.json({ message: "L'area riservata è disattivata su questo server" }, { status: 403 });
+  }
   const jar = await cookies();
   if (!isAdminToken(jar.get(COOKIE_NAME)?.value)) {
     return NextResponse.json({ message: "Sessione scaduta: inserisci di nuovo il PIN" }, { status: 401 });

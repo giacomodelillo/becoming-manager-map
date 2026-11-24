@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { connection, NextResponse, type NextRequest } from "next/server";
 import {
   adminConfigured,
+  adminEnabled,
   checkPin,
   COOKIE_NAME,
   isAdminToken,
@@ -10,30 +11,38 @@ import {
 } from "@/lib/expo/server/auth";
 
 const MAX_ATTEMPTS = 5;
-const LOCK_MS = 60_000;
 
-const g = globalThis as unknown as {
-  __expoAttempts?: Map<string, { count: number; lockedUntil: number }>;
-};
+type Attempt = { count: number; strikes: number; lockedUntil: number };
+const g = globalThis as unknown as { __expoAttempts?: Map<string, Attempt> };
 const attempts = (g.__expoAttempts ??= new Map());
 
 export async function GET() {
   await connection();
   const jar = await cookies();
   return NextResponse.json(
-    { configured: adminConfigured(), admin: isAdminToken(jar.get(COOKIE_NAME)?.value) },
+    {
+      enabled: adminEnabled(),
+      configured: adminConfigured(),
+      admin: isAdminToken(jar.get(COOKIE_NAME)?.value),
+    },
     { headers: { "Cache-Control": "no-store" } },
   );
 }
 
 export async function POST(request: NextRequest) {
+  if (!adminEnabled()) {
+    return NextResponse.json({ message: "L'area riservata è disattivata su questo server" }, { status: 403 });
+  }
   if (!adminConfigured()) {
-    return NextResponse.json({ message: "PIN non configurato sul server (EXPO_ADMIN_PIN)" }, { status: 503 });
+    return NextResponse.json(
+      { message: "PIN non configurato sul server (EXPO_ADMIN_PIN, da 6 a 12 cifre)" },
+      { status: 503 },
+    );
   }
 
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
   const now = Date.now();
-  const record = attempts.get(ip) ?? { count: 0, lockedUntil: 0 };
+  const record = attempts.get(ip) ?? { count: 0, strikes: 0, lockedUntil: 0 };
   if (record.lockedUntil > now) {
     const seconds = Math.ceil((record.lockedUntil - now) / 1000);
     return NextResponse.json({ message: `Troppi tentativi. Riprova tra ${seconds} secondi.` }, { status: 429 });
@@ -50,8 +59,10 @@ export async function POST(request: NextRequest) {
   if (!checkPin(pin)) {
     record.count += 1;
     if (record.count >= MAX_ATTEMPTS) {
+      // 1 minuto, poi 5, poi 15 (massimo) a ogni nuova serie di errori
+      record.strikes += 1;
       record.count = 0;
-      record.lockedUntil = now + LOCK_MS;
+      record.lockedUntil = now + Math.min(60_000 * 5 ** (record.strikes - 1), 15 * 60_000);
     }
     attempts.set(ip, record);
     return NextResponse.json({ message: "PIN errato" }, { status: 401 });

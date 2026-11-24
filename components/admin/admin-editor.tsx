@@ -1,14 +1,37 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Plus } from "lucide-react";
-import { adminStore, isDirty, useAdminState } from "@/lib/expo/admin-store";
+import { useMemo, useState } from "react";
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  type DragOverEvent,
+} from "@dnd-kit/core";
+import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { Plus, Redo2, Undo2 } from "lucide-react";
+import { adminStore, isDirty, useAdminState, type HistoryMode } from "@/lib/expo/admin-store";
 import { saveConfig } from "@/lib/expo/admin-api";
-import { addArea, countCompanies, MAX_AREAS, MAX_COMPANIES } from "@/lib/expo/config-ops";
+import {
+  addArea,
+  countCompanies,
+  locate,
+  MAX_AREAS,
+  MAX_COMPANIES,
+  moveCompanyTo,
+} from "@/lib/expo/config-ops";
 import { applyRemote } from "@/lib/expo/data-store";
 import type { FairConfig } from "@/lib/expo/types";
 import { AreaBlock } from "./area-block";
-import { Btn, Eyebrow, TextField } from "./fields";
+import { DisplaySettingsPanel } from "./display-settings";
+import { Btn, Eyebrow, IconBtn, TextField } from "./fields";
+import { ImportPanel } from "./import-panel";
+import { useUnsavedGuard } from "./use-unsaved-guard";
+import { VersionsPanel } from "./versions-panel";
 
 type Props = {
   onLogout: () => void;
@@ -28,6 +51,14 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
   const [message, setMessage] = useState<Message | null>(null);
 
   const dirty = isDirty(admin);
+  useUnsavedGuard(dirty);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
+
   const total = draft ? countCompanies(draft) : 0;
   const starts = useMemo(() => {
     let n = 1;
@@ -38,19 +69,29 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
     });
   }, [draft]);
 
-  useEffect(() => {
-    if (!dirty) return;
-    const warn = (e: BeforeUnloadEvent) => e.preventDefault();
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
-  }, [dirty]);
-
   if (!draft) return null;
 
-  const change = (next: FairConfig) => {
-    adminStore.setDraft(next);
+  const change = (next: FairConfig, mode: HistoryMode = "push") => {
+    adminStore.setDraft(next, mode);
     setMessage(null);
   };
+
+  // Trascinamento: un solo punto di annullamento per tutto il gesto
+  function onDragOver({ active, over }: DragOverEvent) {
+    if (!over || !draft) return;
+    const from = locate(draft, String(active.id));
+    const to = locate(draft, String(over.id));
+    if (!from || !to || from.ai === to.ai) return;
+    change(moveCompanyTo(draft, String(active.id), draft.areas[to.ai].id, to.ci), "skip");
+  }
+
+  function onDragEnd({ active, over }: DragEndEvent) {
+    if (!over || !draft || active.id === over.id) return;
+    const from = locate(draft, String(active.id));
+    const to = locate(draft, String(over.id));
+    if (!from || !to || from.ai !== to.ai) return;
+    change(moveCompanyTo(draft, String(active.id), draft.areas[to.ai].id, to.ci), "skip");
+  }
 
   async function save() {
     if (!draft) return;
@@ -69,7 +110,7 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div className="space-y-1">
           <Eyebrow>Area riservata</Eyebrow>
@@ -84,6 +125,8 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
         </Btn>
       </header>
 
+      <DisplaySettingsPanel config={draft} onChange={change} />
+
       <section className="space-y-4">
         <Eyebrow>Etichette</Eyebrow>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -91,30 +134,41 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
             label="Etichetta timer"
             value={draft.timerLabel}
             maxLength={20}
-            onChange={(timerLabel) => change({ ...draft, timerLabel })}
+            onChange={(timerLabel) => change({ ...draft, timerLabel }, "coalesce")}
           />
           <TextField
             label="Etichetta ingresso"
             value={draft.entranceLabel}
             maxLength={20}
-            onChange={(entranceLabel) => change({ ...draft, entranceLabel })}
+            onChange={(entranceLabel) => change({ ...draft, entranceLabel }, "coalesce")}
           />
         </div>
       </section>
 
-      <div className="space-y-6">
-        {draft.areas.map((area, i) => (
-          <AreaBlock
-            key={area.id}
-            config={draft}
-            area={area}
-            index={i}
-            start={starts[i]}
-            openKey={openKey}
-            onOpen={(key) => adminStore.setOpenKey(key)}
-            onChange={change}
-          />
-        ))}
+      <section className="space-y-4">
+        <div className="space-y-1">
+          <Eyebrow>Aree e aziende</Eyebrow>
+          <p className="text-sm text-white/65">
+            Trascina le righe per riordinare, anche da un&apos;area all&apos;altra. Tocca un&apos;azienda per
+            modificarla.
+          </p>
+        </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={() => adminStore.snapshot()} onDragOver={onDragOver} onDragEnd={onDragEnd}>
+          <div className="space-y-6">
+            {draft.areas.map((area, i) => (
+              <AreaBlock
+                key={area.id}
+                config={draft}
+                area={area}
+                index={i}
+                start={starts[i]}
+                openKey={openKey}
+                onOpen={(key) => adminStore.setOpenKey(key)}
+                onChange={change}
+              />
+            ))}
+          </div>
+        </DndContext>
         <Btn
           variant="ghost"
           disabled={draft.areas.length >= MAX_AREAS || total >= MAX_COMPANIES}
@@ -122,7 +176,10 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
         >
           <Plus className="size-4" /> Aggiungi area
         </Btn>
-      </div>
+      </section>
+
+      <ImportPanel config={draft} onApply={(next) => change(next)} />
+      <VersionsPanel config={draft} currentVersion={version} onLoad={(next) => change(next)} />
 
       <div className="sticky bottom-0 -mx-5 flex flex-wrap items-center gap-3 border-t border-white/20 bg-[var(--ink)] px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
         <p
@@ -138,6 +195,12 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
             Ricarica i dati
           </Btn>
         )}
+        <IconBtn label="Annulla l'ultima modifica" disabled={admin.past.length === 0 || busy} onClick={() => adminStore.undo()}>
+          <Undo2 className="size-5" strokeWidth={1.5} />
+        </IconBtn>
+        <IconBtn label="Ripristina la modifica annullata" disabled={admin.future.length === 0 || busy} onClick={() => adminStore.redo()}>
+          <Redo2 className="size-5" strokeWidth={1.5} />
+        </IconBtn>
         <Btn
           variant="ghost"
           disabled={!dirty || busy}
@@ -146,7 +209,7 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
             setMessage(null);
           }}
         >
-          Annulla modifiche
+          Scarta
         </Btn>
         <Btn disabled={!dirty || busy} onClick={() => void save()}>
           {busy ? "Salvo…" : "Salva"}

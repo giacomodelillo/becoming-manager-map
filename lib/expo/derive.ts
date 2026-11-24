@@ -20,11 +20,15 @@ export function deriveFairView(config: FairConfig): FairView {
   const layout = { timerLabel: config.timerLabel, entranceLabel: config.entranceLabel, columns };
   assertFairData(companies, layout);
 
+  const present = companies.filter((c) => !c.hidden).map((c) => c.id);
+  if (present.length === 0) throw new Error("Serve almeno un'azienda presente");
+
   return {
     companies,
     layout,
-    boothIds: companies.map((c) => c.id),
+    boothIds: present,
     byId: new Map(companies.map((c) => [c.id, c])),
+    display: config.display,
   };
 }
 

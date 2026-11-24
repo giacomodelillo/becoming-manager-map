@@ -18,5 +18,8 @@ export function BoothDetailBody({ boothId }: { boothId: number }) {
   if (!company) {
     return <p className="text-base">Questa azienda non esiste più. Torna all&apos;elenco e scegline un&apos;altra.</p>;
   }
+  if (company.hidden) {
+    return <p className="text-base">Questa azienda oggi non partecipa all&apos;evento.</p>;
+  }
   return <CompanyCard company={company} />;
 }

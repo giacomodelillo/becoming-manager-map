@@ -7,6 +7,7 @@ import { useShell } from "@/components/shell/shell-context";
 import { adminStore, useAdminState } from "@/lib/expo/admin-store";
 import { useFairView } from "@/lib/expo/data-store";
 import { deriveFairView, layoutSignature } from "@/lib/expo/derive";
+import { mapTextPx } from "@/lib/expo/display";
 
 /**
  * Anteprima della mappa nello stage. Mostra la bozza in modifica;
@@ -39,7 +40,7 @@ export function AdminPreview() {
 
   return (
     <div className="relative h-full w-full">
-      <MapCanvas refitKey={layoutSignature(view)}>
+      <MapCanvas refitKey={layoutSignature(view)} minTextPx={mapTextPx(view?.display.mapSize ?? "fit")}>
         {view ? (
           <FlowMapView
             view={view}

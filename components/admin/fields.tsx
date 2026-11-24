@@ -105,3 +105,77 @@ export function IconBtn({
     />
   );
 }
+
+/** Scelta tra poche opzioni predefinite (grandezze, ecc.). */
+export function ChoiceGroup<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: { value: T; label: string; hint?: string }[];
+  onChange: (value: T) => void;
+}) {
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/60">{label}</p>
+      <div role="group" aria-label={label} className="grid gap-2 sm:grid-cols-2">
+        {options.map((o) => (
+          <button
+            key={o.value}
+            type="button"
+            aria-pressed={value === o.value}
+            onClick={() => onChange(o.value)}
+            className={cn(
+              "min-h-14 border px-4 py-2 text-left transition active:translate-y-0.5",
+              value === o.value
+                ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
+                : "border-white/30 text-[var(--paper)] active:bg-white/10",
+            )}
+          >
+            <span className="block text-sm font-semibold">{o.label}</span>
+            {o.hint && <span className="block text-xs opacity-70">{o.hint}</span>}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Interruttore squadrato. */
+export function Toggle({
+  label,
+  hint,
+  checked,
+  onChange,
+}: {
+  label: string;
+  hint?: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      onClick={() => onChange(!checked)}
+      className="flex min-h-12 w-full items-center gap-3 border border-white/25 px-3 py-2 text-left transition active:bg-white/10"
+    >
+      <span
+        className={cn(
+          "flex h-6 w-11 shrink-0 items-center border p-0.5",
+          checked ? "border-[var(--gold)] bg-[var(--gold)]" : "border-white/40",
+        )}
+      >
+        <span className={cn("size-4 transition-transform", checked ? "translate-x-5 bg-[var(--ink)]" : "bg-white/70")} />
+      </span>
+      <span className="min-w-0">
+        <span className="block text-sm font-semibold">{label}</span>
+        {hint && <span className="block text-xs text-white/55">{hint}</span>}
+      </span>
+    </button>
+  );
+}

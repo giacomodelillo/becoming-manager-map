@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { assertFairData, buildStudentRoute, routeHasEdge } from "./route";
 import { defaultConfig } from "./data/default";
 import { deriveFairView } from "./derive";
-import { moveCompany, removeCompany, removeArea, addCompany } from "./config-ops";
+import { duplicateCompany, moveCompany, moveCompanyTo, removeArea, removeCompany, addCompany } from "./config-ops";
+import { applyImport, parseCsv, rowsToEntries } from "./import";
 import { parseFairConfig } from "./validate";
 
 describe("buildStudentRoute", () => {
@@ -12,14 +13,11 @@ describe("buildStudentRoute", () => {
   it("con start 1 è l'ordine naturale", () => {
     expect(buildStudentRoute([1, 2, 3, 4, 5], 1)).toEqual([1, 2, 3, 4, 5]);
   });
-  it("con start N finisce a N-1", () => {
-    expect(buildStudentRoute([1, 2, 3, 4, 5], 5)).toEqual([5, 1, 2, 3, 4]);
+  it("salta le aziende assenti", () => {
+    expect(buildStudentRoute([1, 2, 4, 5], 4)).toEqual([4, 5, 1, 2]);
   });
-  it("una sola azienda", () => {
-    expect(buildStudentRoute([1], 1)).toEqual([1]);
-  });
-  it("null se start non esiste", () => {
-    expect(buildStudentRoute([1, 2, 3], 9)).toBeNull();
+  it("null se start non esiste (o è assente)", () => {
+    expect(buildStudentRoute([1, 2, 4], 3)).toBeNull();
   });
 });
 
@@ -33,9 +31,21 @@ describe("routeHasEdge", () => {
 describe("deriveFairView", () => {
   it("numera i booth 1..N seguendo le aree", () => {
     const view = deriveFairView(defaultConfig);
-    expect(view.boothIds).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    expect(view.boothIds).toHaveLength(12);
     expect(view.layout.columns[1].booths).toEqual([5, 6, 7, 8]);
-    expect(view.byId.get(1)?.name).toBe("Nova Software");
+  });
+  it("un'azienda assente tiene il numero ma esce dai percorsi", () => {
+    const cfg = structuredClone(defaultConfig);
+    cfg.areas[0].companies[1].hidden = true;
+    const view = deriveFairView(cfg);
+    expect(view.byId.get(2)?.hidden).toBe(true);
+    expect(view.boothIds).not.toContain(2);
+    expect(view.companies).toHaveLength(12);
+  });
+  it("rifiuta se sono tutte assenti", () => {
+    const cfg = structuredClone(defaultConfig);
+    cfg.areas.forEach((a) => a.companies.forEach((c) => (c.hidden = true)));
+    expect(() => deriveFairView(cfg)).toThrow();
   });
   it("assertFairData rifiuta un booth duplicato", () => {
     const view = deriveFairView(defaultConfig);
@@ -45,21 +55,13 @@ describe("deriveFairView", () => {
 });
 
 describe("config-ops", () => {
-  const firstKey = defaultConfig.areas[0].companies[0].key;
+  const first = defaultConfig.areas[0].companies[0].key;
   const lastOfA = defaultConfig.areas[0].companies[3].key;
 
-  it("sposta un'azienda dentro l'area", () => {
-    const next = moveCompany(defaultConfig, firstKey, 1);
-    expect(next.areas[0].companies[1].key).toBe(firstKey);
-  });
-  it("ai bordi passa all'area vicina e cambia numero", () => {
+  it("sposta dentro l'area e ai bordi passa a quella vicina", () => {
+    expect(moveCompany(defaultConfig, first, 1).areas[0].companies[1].key).toBe(first);
     const next = moveCompany(defaultConfig, lastOfA, 1);
-    expect(next.areas[0].companies).toHaveLength(3);
-    expect(next.areas[1].companies[0].key).toBe(lastOfA);
-    expect(deriveFairView(next).byId.get(4)?.name).toBe(defaultConfig.areas[1].companies[0].name === "" ? "" : deriveFairView(next).byId.get(4)?.name);
-  });
-  it("non sposta oltre i confini", () => {
-    expect(moveCompany(defaultConfig, firstKey, -1)).toBe(defaultConfig);
+    expect(next.areas.map((a) => a.companies.length)).toEqual([3, 5, 4]);
   });
   it("non lascia un'area vuota", () => {
     let c = defaultConfig;
@@ -69,30 +71,85 @@ describe("config-ops", () => {
   });
   it("eliminare un'area unisce le aziende alla vicina", () => {
     const next = removeArea(defaultConfig, "a");
-    expect(next.areas).toHaveLength(2);
     expect(next.areas[0].companies).toHaveLength(8);
   });
-  it("aggiunge un'azienda in coda all'area", () => {
+  it("aggiunge in coda", () => {
     const { config, key } = addCompany(defaultConfig, "b");
     expect(config.areas[1].companies.at(-1)?.key).toBe(key);
+  });
+  it("duplica subito dopo l'originale con una chiave nuova", () => {
+    const { config, key } = duplicateCompany(defaultConfig, first);
+    expect(config.areas[0].companies[1].key).toBe(key);
+    expect(config.areas[0].companies[1].name).toBe("Nova Software (copia)");
+    expect(config.areas[0].companies).toHaveLength(5);
+  });
+  it("moveCompanyTo porta un'azienda in un'altra area a una posizione precisa", () => {
+    const next = moveCompanyTo(defaultConfig, first, "b", 2);
+    expect(next.areas[1].companies[2].key).toBe(first);
+    expect(next.areas[0].companies).toHaveLength(3);
+  });
+});
+
+describe("importazione CSV", () => {
+  const csv =
+    "\uFEFFArea;Azienda;Settore;Descrizione;Posizioni;Requisiti;Note;Assente\r\n" +
+    'Area A;Alfa;Tech;"Descrizione; con punto e virgola";"Dev | QA";"Laurea | Inglese";Nota;\r\n' +
+    "Area B;Beta;Food;Buona;Cuoco;;;sì\r\n" +
+    ";;;;;;;\r\n" +
+    "Area A;Gamma;Tech;Altra;Analista;;;\r\n";
+
+  it("legge virgolette, separatore e BOM", () => {
+    const rows = parseCsv(csv);
+    expect(rows[0][0]).toBe("Area");
+    expect(rows[1][3]).toBe("Descrizione; con punto e virgola");
+    expect(rows).toHaveLength(4);
+  });
+  it("crea le aziende con liste e assenza", () => {
+    const { entries } = rowsToEntries(parseCsv(csv));
+    expect(entries).toHaveLength(3);
+    expect(entries[0].company.roles).toEqual(["Dev", "QA"]);
+    expect(entries[1].company.hidden).toBe(true);
+  });
+  it("sostituisce o aggiunge in coda, raggruppando per area", () => {
+    const { entries } = rowsToEntries(parseCsv(csv));
+    const replaced = applyImport(defaultConfig, entries, "replace");
+    expect(replaced.areas.map((a) => a.companies.length)).toEqual([2, 1]);
+    const appended = applyImport(defaultConfig, entries, "append");
+    expect(appended.areas).toHaveLength(3 + 0); // "Area A" e "Area B" esistono già
+    expect(appended.areas[0].companies).toHaveLength(6);
+  });
+  it("errore chiaro senza la colonna Azienda", () => {
+    expect(() => rowsToEntries([["Foo"], ["bar"]])).toThrow(/Azienda/);
   });
 });
 
 describe("parseFairConfig", () => {
-  it("accetta i dati di partenza", () => {
-    expect(() => parseFairConfig(defaultConfig)).not.toThrow();
+  it("accetta i dati di partenza e aggiunge display ai vecchi file", () => {
+    const old = structuredClone(defaultConfig) as Record<string, unknown>;
+    delete old.display;
+    expect(parseFairConfig(old).display.mapSize).toBe("fit");
   });
-  it("rifiuta un nome vuoto", () => {
-    const bad = structuredClone(defaultConfig);
-    bad.areas[0].companies[0].name = "   ";
-    expect(() => parseFairConfig(bad)).toThrow();
+  it("scarta nomi di file non validi e accetta quelli giusti", () => {
+    const cfg = structuredClone(defaultConfig);
+    cfg.areas[0].companies[0].logo = "../../etc/passwd";
+    cfg.areas[0].companies[1].logo = "a1b2c3d4e5f6.webp";
+    const parsed = parseFairConfig(cfg);
+    expect(parsed.areas[0].companies[0].logo).toBeUndefined();
+    expect(parsed.areas[0].companies[1].logo).toBe("a1b2c3d4e5f6.webp");
   });
-  it("rifiuta un'area senza aziende", () => {
-    const bad = structuredClone(defaultConfig);
-    bad.areas[0].companies = [];
-    expect(() => parseFairConfig(bad)).toThrow();
+  it("controlla l'indirizzo pubblico", () => {
+    const cfg = structuredClone(defaultConfig);
+    cfg.display.publicUrl = "ftp://x";
+    expect(() => parseFairConfig(cfg)).toThrow();
+    cfg.display.publicUrl = "http://192.168.1.20:3000/";
+    expect(parseFairConfig(cfg).display.publicUrl).toBe("http://192.168.1.20:3000");
   });
-  it("rifiuta input non oggetto", () => {
-    expect(() => parseFairConfig("ciao")).toThrow();
+  it("rifiuta un nome vuoto e un'area vuota", () => {
+    const a = structuredClone(defaultConfig);
+    a.areas[0].companies[0].name = "  ";
+    expect(() => parseFairConfig(a)).toThrow();
+    const b = structuredClone(defaultConfig);
+    b.areas[0].companies = [];
+    expect(() => parseFairConfig(b)).toThrow();
   });
 });

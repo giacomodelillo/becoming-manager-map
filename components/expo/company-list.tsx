@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { useFairView } from "@/lib/expo/data-store";
+import { mediaUrl } from "@/lib/expo/media";
 import { useExpoRoute } from "./use-expo-route";
 
-/** Tutte le aziende in ordine di booth: tocca per aprire la scheda. */
+/** Aziende presenti in ordine di booth: tocca per aprire la scheda. */
 export function CompanyList() {
   const { openBooth } = useExpoRoute();
-  const sorted = useFairView()?.companies ?? [];
+  const present = (useFairView()?.companies ?? []).filter((c) => !c.hidden);
 
   return (
     <section aria-labelledby="companies-title" className="space-y-3">
@@ -19,7 +20,7 @@ export function CompanyList() {
         </h2>
       </div>
       <ul className="space-y-2">
-        {sorted.map((c) => (
+        {present.map((c) => (
           <li key={c.id}>
             <Link
               href={`/expo/${c.id}`}
@@ -33,6 +34,10 @@ export function CompanyList() {
                 <span className="block truncate font-semibold">{c.name}</span>
                 <span className="block truncate text-xs text-white/60">{c.sector}</span>
               </span>
+              {c.logo && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={mediaUrl(c.logo)} alt="" className="size-9 shrink-0 bg-white object-contain p-0.5" />
+              )}
               <ChevronRight className="size-5 shrink-0 text-white/50" strokeWidth={1.5} aria-hidden />
             </Link>
           </li>

@@ -20,7 +20,7 @@ export function PinGate({ onSuccess }: { onSuccess: () => void }) {
   }, []);
 
   const submit = useCallback(async () => {
-    if (pin.length < 4 || busy) return;
+    if (pin.length < 6 || busy) return;
     setBusy(true);
     const result = await login(pin);
     setBusy(false);
@@ -83,7 +83,7 @@ export function PinGate({ onSuccess }: { onSuccess: () => void }) {
         </button>
         <button
           type="button"
-          disabled={pin.length < 4 || busy}
+          disabled={pin.length < 6 || busy}
           onClick={() => void submit()}
           className="flex h-16 items-center justify-center bg-[var(--gold)] text-sm font-semibold uppercase tracking-[0.18em] text-[var(--ink)] transition active:translate-y-0.5 disabled:opacity-40"
         >

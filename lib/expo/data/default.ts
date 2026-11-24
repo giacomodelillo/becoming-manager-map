@@ -1,3 +1,4 @@
+import { DEFAULT_DISPLAY } from "../display";
 import type { FairConfig } from "../types";
 
 /**
@@ -7,6 +8,7 @@ import type { FairConfig } from "../types";
 export const defaultConfig: FairConfig = {
   timerLabel: "Timer",
   entranceLabel: "Ingresso",
+  display: DEFAULT_DISPLAY,
   areas: [
     {
       id: "a",

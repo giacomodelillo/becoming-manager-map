@@ -1,6 +1,17 @@
 import { newKey } from "./config-ops";
 import { deriveFairView } from "./derive";
-import type { Area, CompanyDraft, FairConfig, FlowDirection, ZoneTone } from "./types";
+import { DEFAULT_DISPLAY, MAP_SIZES, PANEL_SIZES } from "./display";
+import { MEDIA_FILE_RE } from "./media";
+import type {
+  Area,
+  CompanyDraft,
+  DisplaySettings,
+  FairConfig,
+  FlowDirection,
+  MapSize,
+  PanelSize,
+  ZoneTone,
+} from "./types";
 
 const TONES: ZoneTone[] = ["gold", "magenta", "gray"];
 const DIRECTIONS: FlowDirection[] = ["up", "down"];
@@ -29,6 +40,27 @@ function record(value: unknown, field: string): Record<string, unknown> {
     throw new Error(`${field}: formato non valido`);
   }
   return value as Record<string, unknown>;
+}
+
+function parseDisplay(value: unknown): DisplaySettings {
+  // i file salvati prima di questa versione non hanno "display": si usano i valori di partenza
+  const d = typeof value === "object" && value !== null ? (value as Record<string, unknown>) : {};
+  const mapSize = MAP_SIZES.some((s) => s.value === d.mapSize) ? (d.mapSize as MapSize) : DEFAULT_DISPLAY.mapSize;
+  const panelSize = PANEL_SIZES.some((s) => s.value === d.panelSize)
+    ? (d.panelSize as PanelSize)
+    : DEFAULT_DISPLAY.panelSize;
+
+  let publicUrl = text(d.publicUrl, 200, "Indirizzo pubblico");
+  if (publicUrl) {
+    try {
+      const url = new URL(publicUrl);
+      if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("protocollo");
+      publicUrl = url.origin + url.pathname.replace(/\/+$/, "");
+    } catch {
+      throw new Error("Indirizzo pubblico: serve un indirizzo che inizia con http:// o https://");
+    }
+  }
+  return { mapSize, panelSize, publicUrl };
 }
 
 /** Controlla e pulisce la configurazione ricevuta dal client. Lancia un Error con messaggio in italiano. */
@@ -63,6 +95,8 @@ export function parseFairConfig(input: unknown): FairConfig {
       if (usedKeys.has(key)) key = newKey();
       usedKeys.add(key);
       const notes = text(c.notes, 500, `${name}, note`);
+      const logo = typeof c.logo === "string" && MEDIA_FILE_RE.test(c.logo) ? c.logo : undefined;
+      const image = typeof c.image === "string" && MEDIA_FILE_RE.test(c.image) ? c.image : undefined;
       total += 1;
       return {
         key,
@@ -72,6 +106,9 @@ export function parseFairConfig(input: unknown): FairConfig {
         roles: lines(c.roles, 20, 120, `${name}, posizioni`),
         requirements: lines(c.requirements, 20, 160, `${name}, requisiti`),
         ...(notes ? { notes } : {}),
+        ...(logo ? { logo } : {}),
+        ...(image ? { image } : {}),
+        ...(c.hidden === true ? { hidden: true } : {}),
       };
     });
     return { id, label, tone, direction, companies };
@@ -83,6 +120,7 @@ export function parseFairConfig(input: unknown): FairConfig {
     timerLabel: text(root.timerLabel, 20, "Etichetta timer") || "Timer",
     entranceLabel: text(root.entranceLabel, 20, "Etichetta ingresso") || "Ingresso",
     areas,
+    display: parseDisplay(root.display),
   };
   deriveFairView(config); // controllo finale di coerenza
   return config;

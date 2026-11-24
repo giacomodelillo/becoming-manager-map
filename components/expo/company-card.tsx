@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/expo/media";
 import type { Company } from "@/lib/expo/types";
 
 function Block({ title, items }: { title: string; items: string[] }) {
@@ -20,6 +21,15 @@ function Block({ title, items }: { title: string; items: string[] }) {
 export function CompanyCard({ company }: { company: Company }) {
   return (
     <article className="space-y-6">
+      {company.image && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={mediaUrl(company.image)}
+          alt=""
+          loading="lazy"
+          className="aspect-video w-full border border-white/15 object-cover"
+        />
+      )}
       <header className="flex items-start gap-4">
         <span
           aria-label={`Booth ${company.id}`}
@@ -27,10 +37,18 @@ export function CompanyCard({ company }: { company: Company }) {
         >
           {company.id}
         </span>
-        <div className="min-w-0 space-y-1">
+        <div className="min-w-0 flex-1 space-y-1">
           <p className="expo-eyebrow">{company.sector}</p>
           <h1 className="expo-serif text-3xl leading-tight">{company.name}</h1>
         </div>
+        {company.logo && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={mediaUrl(company.logo)}
+            alt={`Logo ${company.name}`}
+            className="size-16 shrink-0 bg-white object-contain p-1"
+          />
+        )}
       </header>
       <p className="text-base leading-relaxed text-[var(--paper)]/85">{company.description}</p>
       <Block title="Posizioni aperte" items={company.roles} />

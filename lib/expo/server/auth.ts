@@ -5,8 +5,11 @@ export const SESSION_SECONDS = 60 * 60 * 8;
 
 const pin = () => process.env.EXPO_ADMIN_PIN?.trim() ?? "";
 
-/** Il PIN fisso sta in EXPO_ADMIN_PIN (.env.local), almeno 4 cifre. */
-export const adminConfigured = () => pin().length >= 4;
+/** Il PIN fisso sta in EXPO_ADMIN_PIN (.env.local): da 6 a 12 cifre. */
+export const adminConfigured = () => /^\d{6,12}$/.test(pin());
+
+/** EXPO_ADMIN_DISABLED=1 spegne del tutto l'area riservata (es. sull'istanza del totem). */
+export const adminEnabled = () => process.env.EXPO_ADMIN_DISABLED !== "1";
 
 const digest = (value: string) => createHash("sha256").update(value).digest();
 const safeEqual = (a: Buffer, b: Buffer) => a.length === b.length && timingSafeEqual(a, b);
@@ -23,6 +26,6 @@ export function sessionToken(): string {
 }
 
 export function isAdminToken(value: string | undefined): boolean {
-  if (!value || !adminConfigured()) return false;
+  if (!value || !adminEnabled() || !adminConfigured()) return false;
   return safeEqual(digest(value), digest(sessionToken()));
 }

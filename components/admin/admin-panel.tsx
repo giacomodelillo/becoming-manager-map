@@ -8,7 +8,7 @@ import { AdminEditor } from "./admin-editor";
 import { Eyebrow } from "./fields";
 import { PinGate } from "./pin-gate";
 
-type Auth = "loading" | "unconfigured" | "locked" | "open";
+type Auth = "loading" | "disabled" | "unconfigured" | "locked" | "open";
 
 /** Contenuto del pannello dettaglio dell'area riservata: PIN, poi tutte le impostazioni. */
 export function AdminPanel() {
@@ -19,7 +19,7 @@ export function AdminPanel() {
   useEffect(() => {
     let alive = true;
     getAuth()
-      .then((a) => alive && setAuth(!a.configured ? "unconfigured" : a.admin ? "open" : "locked"))
+      .then((a) => alive && setAuth(!a.enabled ? "disabled" : !a.configured ? "unconfigured" : a.admin ? "open" : "locked"))
       .catch(() => alive && setAuth("locked"));
     return () => {
       alive = false;
@@ -51,13 +51,22 @@ export function AdminPanel() {
 
   if (auth === "loading") return <p className="text-sm text-white/60">Caricamento…</p>;
 
+  if (auth === "disabled") {
+    return (
+      <div className="space-y-2">
+        <Eyebrow>Area riservata</Eyebrow>
+        <p className="text-base">L&apos;area riservata è disattivata su questo server.</p>
+      </div>
+    );
+  }
+
   if (auth === "unconfigured") {
     return (
       <div className="space-y-2">
         <Eyebrow>Area riservata</Eyebrow>
         <p className="text-base">
           L&apos;area riservata è disattivata: imposta <code>EXPO_ADMIN_PIN</code> in <code>.env.local</code>{" "}
-          (almeno 4 cifre) e riavvia il server.
+          (da 6 a 12 cifre) e riavvia il server.
         </p>
       </div>
     );

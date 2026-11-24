@@ -17,7 +17,7 @@ export function countCompanies(config: FairConfig): number {
   return config.areas.reduce((sum, a) => sum + a.companies.length, 0);
 }
 
-function mapAreas(config: FairConfig, fn: (a: Area) => Area): FairConfig {
+function mapAreas(config: FairConfig, fn: (a: Area, index: number) => Area): FairConfig {
   return { ...config, areas: config.areas.map(fn) };
 }
 
@@ -121,5 +121,40 @@ export function moveCompany(config: FairConfig, key: string, delta: -1 | 1): Fai
   const [item] = list.splice(ci, 1);
   if (delta < 0) areas[nextArea].companies.push(item);
   else areas[nextArea].companies.unshift(item);
+  return { ...config, areas };
+}
+
+/** Duplica un'azienda subito dopo l'originale (logo e immagine restano gli stessi file). */
+export function duplicateCompany(config: FairConfig, key: string): { config: FairConfig; key: string | null } {
+  const loc = locate(config, key);
+  if (!loc || countCompanies(config) >= MAX_COMPANIES) return { config, key: null };
+  const original = config.areas[loc.ai].companies[loc.ci];
+  const copy: CompanyDraft = {
+    ...original,
+    key: newKey(),
+    name: `${original.name} (copia)`.slice(0, 80),
+    roles: [...original.roles],
+    requirements: [...original.requirements],
+  };
+  return {
+    config: mapAreas(config, (a, ai) =>
+      ai === loc.ai
+        ? { ...a, companies: [...a.companies.slice(0, loc.ci + 1), copy, ...a.companies.slice(loc.ci + 1)] }
+        : a,
+    ),
+    key: copy.key,
+  };
+}
+
+/** Porta un'azienda in una posizione precisa di un'area (anche diversa). Per il trascinamento. */
+export function moveCompanyTo(config: FairConfig, key: string, areaId: string, index: number): FairConfig {
+  const loc = locate(config, key);
+  const to = config.areas.findIndex((a) => a.id === areaId);
+  if (!loc || to === -1) return config;
+  if (loc.ai !== to && config.areas[loc.ai].companies.length < 2) return config;
+  const areas = config.areas.map((a) => ({ ...a, companies: [...a.companies] }));
+  const [item] = areas[loc.ai].companies.splice(loc.ci, 1);
+  const list = areas[to].companies;
+  list.splice(Math.max(0, Math.min(index, list.length)), 0, item);
   return { ...config, areas };
 }

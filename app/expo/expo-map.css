@@ -186,3 +186,14 @@
 @media (prefers-reduced-motion: reduce) {
   .expo-zone, .expo-pod, .expo-pin, .expo-landmark, .expo-link-line { animation: none !important; }
 }
+
+/* azienda assente: il booth resta al suo posto, ma è spento e fuori dai percorsi */
+.expo-pod[data-state="absent"] {
+  border: 1px dashed color-mix(in srgb, var(--ink) 45%, transparent);
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.6;
+}
+.expo-pod[data-state="absent"] .expo-pod-num { background: var(--gray); }
+.expo-pod[data-state="absent"] .expo-pod-name { text-decoration: line-through; }
+.expo-pod[data-state="absent"]:active { transform: none; }
