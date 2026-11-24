@@ -51,9 +51,11 @@ function ShellFrame({ children, detail }: AppShellProps) {
     >
       <FloatingToolbar />
 
+      {/* su desktop la riga ha l'altezza dello schermo (minmax(0,1fr)): senza, il pannello cresce
+          oltre lo schermo e la parte in basso viene tagliata invece di scorrere */}
       <div
         data-detail={detailOpen ? "open" : "closed"}
-        className="grid h-full grid-cols-1 lg:grid-cols-[0fr_1fr] lg:transition-[grid-template-columns] lg:duration-300 lg:ease-in-out lg:data-[detail=open]:grid-cols-[1fr_1fr]"
+        className="grid h-full grid-cols-1 lg:grid-cols-[0fr_1fr] lg:grid-rows-[minmax(0,1fr)] lg:transition-[grid-template-columns] lg:duration-300 lg:ease-in-out lg:data-[detail=open]:grid-cols-[1fr_1fr]"
       >
         <DetailPanel>{detail}</DetailPanel>
         <MainStage>{children}</MainStage>

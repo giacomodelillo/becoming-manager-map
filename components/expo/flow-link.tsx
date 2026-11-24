@@ -1,8 +1,8 @@
-export type LinkDir = "up" | "down" | "right";
+export type LinkDir = "up" | "down" | "right" | "left";
 
 /** Freccia di flusso. `active` = tratto del percorso dello studente (si disegna una volta). */
 export function FlowLink({ dir, active }: { dir: LinkDir; active: boolean }) {
-  const horizontal = dir === "right";
+  const horizontal = dir === "right" || dir === "left";
   return (
     <svg
       aria-hidden
@@ -22,6 +22,12 @@ export function FlowLink({ dir, active }: { dir: LinkDir; active: boolean }) {
         <>
           <path className="expo-link-line" pathLength={1} d="M12 2 V30" />
           <path className="expo-link-head" d="M6 23 L12 31 L18 23" />
+        </>
+      )}
+      {dir === "left" && (
+        <>
+          <path className="expo-link-line" pathLength={1} d="M52 12 H14" />
+          <path className="expo-link-head" d="M21 6 L13 12 L21 18" />
         </>
       )}
       {dir === "right" && (

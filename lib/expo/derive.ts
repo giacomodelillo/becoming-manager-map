@@ -17,7 +17,12 @@ export function deriveFairView(config: FairConfig): FairView {
     return { id: area.id, direction: area.direction, booths, label: area.label, tone: area.tone };
   });
 
-  const layout = { timerLabel: config.timerLabel, entranceLabel: config.entranceLabel, columns };
+  const layout = {
+    timerLabel: config.timerLabel,
+    entranceLabel: config.entranceLabel,
+    columns,
+    ...(config.rtl ? { rtl: true } : {}),
+  };
   assertFairData(companies, layout);
 
   const present = companies.filter((c) => !c.hidden).map((c) => c.id);

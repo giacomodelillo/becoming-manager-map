@@ -17,13 +17,26 @@ const g = globalThis as unknown as { __expoWriteLock?: Promise<unknown> };
 
 const historyName = (version: number) => `v${String(version).padStart(8, "0")}.json`;
 
-/** Legge sempre dal file: più rotte (o il reload in sviluppo) vedono gli stessi dati. */
+/**
+ * Legge sempre dal file: più rotte (o il reload in sviluppo) vedono gli stessi dati.
+ * Se il file non esiste si usano i dati di partenza. Se esiste ma non è valido (es. un errore
+ * scritto a mano in expo.json) si segnala l'errore nel terminale e la lettura fallisce:
+ * i dispositivi tengono gli ultimi dati buoni invece di mostrare quelli di esempio.
+ */
 export async function readFair(): Promise<SavedFair> {
+  let raw: string;
   try {
-    const raw = JSON.parse(await fs.readFile(FILE, "utf8")) as { version?: number; config?: unknown };
-    return { version: Number(raw.version) || 1, config: parseFairConfig(raw.config) };
-  } catch {
-    return { version: 1, config: defaultConfig };
+    raw = await fs.readFile(FILE, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return { version: 1, config: defaultConfig };
+    throw error;
+  }
+  try {
+    const parsed = JSON.parse(raw) as { version?: number; config?: unknown };
+    return { version: Number(parsed.version) || 1, config: parseFairConfig(parsed.config) };
+  } catch (error) {
+    console.error(`[expo] ${FILE} non è valido:`, error instanceof Error ? error.message : error);
+    throw error;
   }
 }
 

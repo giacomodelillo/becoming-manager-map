@@ -1,0 +1,51 @@
+{
+  "adacta": {
+    "light": "1Ak2T_MH2yQckzwgMB5hgAlToORjWUy_I",
+    "dark": "108bGwXNx2SCG2w6-mYFr0jJ1expYcP5p"
+  },
+  "sintesia": {
+    "light": "15104hmxlnDd82llxUrsOJRxQafaFOLdq",
+    "dark": "1TVDZMcYPscZ7gf3Sda6Ajhl8wq9QnIPw"
+  },
+  "considi": {
+    "light": "1ABzjYRUdyXZtS_dAHuJdO3MFQ9MXQul2"
+  },
+  "impresoft": {
+    "light": "130b5U_G7EcQjKsaQCONVuh0NZP2uCO56",
+    "dark": "1qCWcUw2u3hlHHr30nPTmYRK_YeGgcrnb"
+  },
+  "ovs": {
+    "dark": "1dpTnmvKfI4xqrzuZ35StcAs6m7lZ3ja4"
+  },
+  "steelco": {
+    "light": "1W4cSf2F9AV0FWzYjtjgtcB9C0MJ6YFgn",
+    "dark": "121pRM4PBPfCzyBqawenvEmpgY7J9FnoA"
+  },
+  "relex": {
+    "light": "1n0COaXZsnOq6nojMqxTefrYx-8kLlFC7",
+    "dark": "1f-LoaALIFkYur6eqOEoEPSDinukGa78a"
+  },
+  "sanmarco": {
+    "light": "1fFyjDhoGrwC-93dW7myouWHjmXs4YfG_",
+    "dark": "1zmptOiEusGp_xaQYPQuRlWAOrtXfZ1Bx"
+  },
+  "zeta": {
+    "light": "1DoeszwOoV1vxqInfjskaAsi2VvkFhow9",
+    "dark": "1YZ_-iH3gO2r0w4MuP68G02fDqIahIM97"
+  },
+  "gottardo": {
+    "light": "1JQrk4z6Ywc11yEQTKCaGO7mzeDBCNsED",
+    "dark": "12qmrYvFbf7rfpr105LtZPKd-XzG2MuS6"
+  },
+  "pillar": {
+    "light": "1idFWFnuftPrJfezFxCKLeLyntu-cu3bj",
+    "dark": "1s1_5kRgrDSTj9eQ3rEzVmNkWhKpUh7KJ"
+  },
+  "aspiag": {
+    "light": "1oNcALzxsSAlzTnIf4IL2fwpw-gRSqmq_",
+    "dark": "1UWAFgNlxuK1lcZEpQUIWa7BLQ9CufEH9"
+  },
+  "frigo-system": {
+    "light": "1pcc1JTffpR1yAMfqTjqKED-R3r86aUKW"
+  }
+}

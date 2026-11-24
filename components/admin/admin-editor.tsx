@@ -28,7 +28,7 @@ import { applyRemote } from "@/lib/expo/data-store";
 import type { FairConfig } from "@/lib/expo/types";
 import { AreaBlock } from "./area-block";
 import { DisplaySettingsPanel } from "./display-settings";
-import { Btn, Eyebrow, IconBtn, TextField } from "./fields";
+import { Btn, Eyebrow, IconBtn, TextField, Toggle } from "./fields";
 import { ImportPanel } from "./import-panel";
 import { useUnsavedGuard } from "./use-unsaved-guard";
 import { VersionsPanel } from "./versions-panel";
@@ -143,6 +143,12 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
             onChange={(entranceLabel) => change({ ...draft, entranceLabel }, "coalesce")}
           />
         </div>
+        <Toggle
+          label="Aree da destra a sinistra"
+          hint="La prima area sta a destra, come nella piantina. Le frecce seguono lo stesso verso."
+          checked={draft.rtl === true}
+          onChange={(rtl) => change({ ...draft, rtl: rtl || undefined })}
+        />
       </section>
 
       <section className="space-y-4">

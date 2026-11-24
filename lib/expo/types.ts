@@ -11,6 +11,12 @@ export type Company = {
   logo?: string;
   /** File dell'immagine di copertina */
   image?: string;
+  /** Logo per sfondo scuro: nel pannello si mostra senza riquadro (ha la precedenza su `logo`) */
+  logoDark?: string;
+  /** Valori, opportunità e contatti: testi del modulo Must & Want */
+  values?: string;
+  opportunities?: string;
+  contacts?: string;
   /** Azienda assente: il booth resta (il numero non cambia) ma esce da percorsi ed elenco */
   hidden?: boolean;
 };
@@ -30,6 +36,8 @@ export type FairColumn = {
 };
 
 export type FairLayout = {
+  /** Aree disegnate da destra a sinistra (la prima area è quella a destra) */
+  rtl?: boolean;
   entranceLabel: string;
   timerLabel: string;
   columns: FairColumn[];
@@ -60,6 +68,8 @@ export type Area = {
 };
 
 export type FairConfig = {
+  /** Aree disegnate da destra a sinistra */
+  rtl?: boolean;
   timerLabel: string;
   entranceLabel: string;
   areas: Area[];

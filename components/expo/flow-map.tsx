@@ -73,6 +73,7 @@ function Zone({
 export function FlowMapView(props: FlowMapViewProps) {
   const { view, route } = props;
   const { columns, timerLabel, entranceLabel } = view.layout;
+  const rtl = view.layout.rtl === true;
 
   return (
     <div className="flex w-max flex-col items-start gap-10 p-12">
@@ -81,7 +82,7 @@ export function FlowMapView(props: FlowMapViewProps) {
         {timerLabel}
       </div>
 
-      <div className="flex items-stretch">
+      <div className={`flex items-stretch ${rtl ? "flex-row-reverse" : ""}`}>
         {columns.map((col, ci) => {
           const next = columns[ci + 1];
           const active = next
@@ -96,7 +97,7 @@ export function FlowMapView(props: FlowMapViewProps) {
                     col.direction === "up" ? "mt-[17px] self-start" : "mb-[17px] self-end"
                   }`}
                 >
-                  <FlowLink dir="right" active={active} />
+                  <FlowLink dir={rtl ? "left" : "right"} active={active} />
                 </div>
               )}
             </Fragment>
@@ -104,8 +105,8 @@ export function FlowMapView(props: FlowMapViewProps) {
         })}
       </div>
 
-      <div className="flex w-[162px] flex-col items-center">
-        <FlowLink dir="up" active={false} />
+      <div className={`flex w-[162px] flex-col items-center ${rtl ? "self-end" : ""}`}>
+        {columns[0].direction === "up" && <FlowLink dir="up" active={false} />}
         <div className="expo-landmark">
           <DoorOpen className="size-5" strokeWidth={1.5} aria-hidden />
           {entranceLabel}

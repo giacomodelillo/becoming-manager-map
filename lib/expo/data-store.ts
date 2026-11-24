@@ -54,7 +54,11 @@ function loadCache() {
 
 /** Applica dati nuovi (dal server o dopo un salvataggio). */
 export function applyRemote(version: number, config: FairConfig) {
-  if (state.view && state.version === version) {
+  // stessa versione E stessi contenuti: niente da aggiornare. Se expo.json è stato modificato
+  // a mano o da uno script senza cambiare "version", i contenuti sono diversi e si aggiorna.
+  const same =
+    state.view !== null && state.version === version && JSON.stringify(state.config) === JSON.stringify(config);
+  if (same) {
     if (state.offline) set({ ...state, offline: false });
     writeCache(version, config);
     return;

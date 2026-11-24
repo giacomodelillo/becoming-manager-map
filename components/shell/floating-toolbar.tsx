@@ -25,14 +25,14 @@ export function FloatingToolbar() {
           router.push("/timer");
         }}
       />
-      <ToolbarButton
+      {/*<ToolbarButton
         label="Expo"
         icon={LayoutGrid}
         onClick={() => {
           setDetailOpen(true);
           router.push("/expo");
         }}
-      />
+      />*/}
 
       {/* mostra/nascondi la colonna laterale: ha senso solo su desktop */}
       <div className="hidden items-center gap-1 lg:flex">

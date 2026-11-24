@@ -36,11 +36,25 @@ export function CompanyForm({
         onChange={(sector) => onChange({ sector }, "coalesce")}
       />
       <TextAreaField
-        label="Descrizione"
+        label="Profilo"
         value={company.description}
         maxLength={1500}
         rows={5}
         onChange={(description) => onChange({ description }, "coalesce")}
+      />
+      <TextAreaField
+        label="Valori"
+        value={company.values ?? ""}
+        maxLength={2000}
+        rows={4}
+        onChange={(values) => onChange({ values }, "coalesce")}
+      />
+      <TextAreaField
+        label="Opportunità"
+        value={company.opportunities ?? ""}
+        maxLength={2000}
+        rows={4}
+        onChange={(opportunities) => onChange({ opportunities }, "coalesce")}
       />
       <TextAreaField
         label="Posizioni aperte"
@@ -50,7 +64,7 @@ export function CompanyForm({
       />
       <TextAreaField
         label="Requisiti"
-        hint="Uno per riga"
+        hint="Un paragrafo per riga"
         value={company.requirements.join("\n")}
         onChange={(v) => onChange({ requirements: v.split("\n") }, "coalesce")}
       />
@@ -61,9 +75,23 @@ export function CompanyForm({
         rows={3}
         onChange={(notes) => onChange({ notes }, "coalesce")}
       />
+      <TextAreaField
+        label="Contatti"
+        value={company.contacts ?? ""}
+        maxLength={600}
+        rows={2}
+        onChange={(contacts) => onChange({ contacts }, "coalesce")}
+      />
       <ImageField
-        label="Logo"
-        hint="Quadrato o orizzontale; PNG, JPG, WebP o SVG"
+        label="Logo per sfondo scuro"
+        hint="Nel pannello viola si mostra senza riquadro. Ha la precedenza"
+        value={company.logoDark}
+        maxSide={512}
+        onChange={(logoDark) => onChange({ logoDark }, "push")}
+      />
+      <ImageField
+        label="Logo per sfondo chiaro"
+        hint="Si mostra in un riquadro bianco. PNG, JPG, WebP o SVG"
         value={company.logo}
         maxSide={512}
         onChange={(logo) => onChange({ logo }, "push")}

@@ -1,5 +1,3 @@
-import { EmptyDetail } from "@/components/sections/empty-detail";
-
-export default function DetailPage() {
-  return <EmptyDetail />;
+export default function Page() {
+  return null;
 }

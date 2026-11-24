@@ -1,14 +1,25 @@
 import { mediaUrl } from "@/lib/expo/media";
 import type { Company } from "@/lib/expo/types";
+import { CompanyLogo } from "./company-logo";
 
-function Block({ title, items }: { title: string; items: string[] }) {
+function Text({ title, text }: { title: string; text?: string }) {
+  if (!text) return null;
+  return (
+    <section className="space-y-2">
+      <h2 className="expo-eyebrow">{title}</h2>
+      <p className="whitespace-pre-line text-base leading-relaxed text-[var(--paper)]/90">{text}</p>
+    </section>
+  );
+}
+
+function List({ title, items }: { title: string; items: string[] }) {
   if (items.length === 0) return null;
   return (
     <section className="space-y-2">
       <h2 className="expo-eyebrow">{title}</h2>
       <ul className="border-t border-white/15">
         {items.map((item) => (
-          <li key={item} className="border-b border-white/15 py-3 text-base">
+          <li key={item} className="whitespace-pre-line border-b border-white/15 py-3 text-base">
             {item}
           </li>
         ))}
@@ -17,10 +28,10 @@ function Block({ title, items }: { title: string; items: string[] }) {
   );
 }
 
-/** Angolo informativo dell'azienda. Nessuno stato: si può usare anche lato server. */
+/** Scheda azienda con le informazioni del modulo Must & Want. Nessuno stato: va bene anche lato server. */
 export function CompanyCard({ company }: { company: Company }) {
   return (
-    <article className="space-y-6">
+    <article className="space-y-7">
       {company.image && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -38,25 +49,21 @@ export function CompanyCard({ company }: { company: Company }) {
           {company.id}
         </span>
         <div className="min-w-0 flex-1 space-y-1">
-          <p className="expo-eyebrow">{company.sector}</p>
+          {company.sector && <p className="expo-eyebrow">{company.sector}</p>}
           <h1 className="expo-serif text-3xl leading-tight">{company.name}</h1>
         </div>
-        {company.logo && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={mediaUrl(company.logo)}
-            alt={`Logo ${company.name}`}
-            className="size-16 shrink-0 bg-white object-contain p-1"
-          />
-        )}
+        <CompanyLogo company={company} className="h-14 max-w-28 shrink-0" />
       </header>
-      <p className="text-base leading-relaxed text-[var(--paper)]/85">{company.description}</p>
-      <Block title="Posizioni aperte" items={company.roles} />
-      <Block title="Requisiti" items={company.requirements} />
+      <Text title="Profilo" text={company.description} />
+      <Text title="Valori" text={company.values} />
+      <Text title="Opportunità" text={company.opportunities} />
+      <List title="Requisiti" items={company.requirements} />
+      <List title="Posizioni aperte" items={company.roles} />
+      <Text title="Contatti" text={company.contacts} />
       {company.notes && (
         <section className="space-y-1 border-l-4 border-[var(--magenta)] bg-white/5 p-4">
           <h2 className="expo-eyebrow">Note</h2>
-          <p className="text-base">{company.notes}</p>
+          <p className="whitespace-pre-line text-base">{company.notes}</p>
         </section>
       )}
     </article>
