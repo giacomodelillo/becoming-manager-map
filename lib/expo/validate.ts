@@ -90,25 +90,25 @@ export function parseFairConfig(input: unknown): FairConfig {
     }
     const companies: CompanyDraft[] = a.companies.map((rawCompany, ci) => {
       const c = record(rawCompany, `${label}, azienda ${ci + 1}`);
-      const name = text(c.name, 80, `${label}, azienda ${ci + 1}, nome`, true);
+      const name = text(c.name, 120, `${label}, azienda ${ci + 1}, nome`, true);
       let key = typeof c.key === "string" && c.key.trim() ? c.key.trim().slice(0, 40) : newKey();
       if (usedKeys.has(key)) key = newKey();
       usedKeys.add(key);
-      const notes = text(c.notes, 500, `${name}, note`);
+      const notes = text(c.notes, 3000, `${name}, note`);
       const logo = typeof c.logo === "string" && MEDIA_FILE_RE.test(c.logo) ? c.logo : undefined;
       const logoDark = typeof c.logoDark === "string" && MEDIA_FILE_RE.test(c.logoDark) ? c.logoDark : undefined;
-      const values = text(c.values, 2000, `${name}, valori`);
-      const opportunities = text(c.opportunities, 2000, `${name}, opportunità`);
-      const contacts = text(c.contacts, 600, `${name}, contatti`);
+      const values = text(c.values, 10000, `${name}, valori`);
+      const opportunities = text(c.opportunities, 10000, `${name}, opportunità`);
+      const contacts = text(c.contacts, 2000, `${name}, contatti`);
       const image = typeof c.image === "string" && MEDIA_FILE_RE.test(c.image) ? c.image : undefined;
       total += 1;
       return {
         key,
         name,
-        sector: text(c.sector, 60, `${name}, settore`),
-        description: text(c.description, 1500, `${name}, descrizione`),
-        roles: lines(c.roles, 20, 120, `${name}, posizioni`),
-        requirements: lines(c.requirements, 20, 1200, `${name}, requisiti`),
+        sector: text(c.sector, 120, `${name}, settore`),
+        description: text(c.description, 10000, `${name}, descrizione`),
+        roles: lines(c.roles, 30, 400, `${name}, posizioni`),
+        requirements: lines(c.requirements, 30, 5000, `${name}, requisiti`),
         ...(notes ? { notes } : {}),
         ...(logo ? { logo } : {}),
         ...(logoDark ? { logoDark } : {}),

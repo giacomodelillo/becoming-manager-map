@@ -75,5 +75,5 @@ export const expoStore = {
 };
 
 export function useExpoState(): ExpoState {
-  return useSyncExternalStore(expoStore.subscribe, expoStore.getState, expoStore.getState);
+  return useSyncExternalStore(expoStore.subscribe, expoStore.getState, () => INITIAL);
 }

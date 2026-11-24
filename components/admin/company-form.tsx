@@ -26,33 +26,33 @@ export function CompanyForm({
       <TextField
         label="Nome azienda"
         value={company.name}
-        maxLength={80}
+        maxLength={120}
         onChange={(name) => onChange({ name }, "coalesce")}
       />
       <TextField
         label="Settore"
         value={company.sector}
-        maxLength={60}
+        maxLength={120}
         onChange={(sector) => onChange({ sector }, "coalesce")}
       />
       <TextAreaField
         label="Profilo"
         value={company.description}
-        maxLength={1500}
-        rows={5}
+        maxLength={10000}
+        rows={8}
         onChange={(description) => onChange({ description }, "coalesce")}
       />
       <TextAreaField
         label="Valori"
         value={company.values ?? ""}
-        maxLength={2000}
+        maxLength={10000}
         rows={4}
         onChange={(values) => onChange({ values }, "coalesce")}
       />
       <TextAreaField
         label="Opportunità"
         value={company.opportunities ?? ""}
-        maxLength={2000}
+        maxLength={10000}
         rows={4}
         onChange={(opportunities) => onChange({ opportunities }, "coalesce")}
       />
@@ -71,14 +71,14 @@ export function CompanyForm({
       <TextAreaField
         label="Note"
         value={company.notes ?? ""}
-        maxLength={500}
+        maxLength={3000}
         rows={3}
         onChange={(notes) => onChange({ notes }, "coalesce")}
       />
       <TextAreaField
         label="Contatti"
         value={company.contacts ?? ""}
-        maxLength={600}
+        maxLength={2000}
         rows={2}
         onChange={(contacts) => onChange({ contacts }, "coalesce")}
       />

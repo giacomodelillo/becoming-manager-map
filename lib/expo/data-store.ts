@@ -16,7 +16,8 @@ export type FairDataState = {
   offline: boolean;
 };
 
-const POLL_MS = 15_000;
+/** In rete locale controllare ogni 5 secondi costa niente: le modifiche arrivano quasi subito. */
+const POLL_MS = 5_000;
 const TIMEOUT_MS = 8_000;
 const CACHE_KEY = "expo:data:v1";
 
@@ -106,11 +107,15 @@ function subscribe(listener: () => void) {
 
 const getSnapshot = () => state;
 
+/** Quello che vede il server (e la prima passata sul client): nessun dato ancora. Evita l'errore di idratazione. */
+const SERVER_STATE: FairDataState = { status: "idle", version: 0, config: null, view: null, offline: false };
+const getServerSnapshot = () => SERVER_STATE;
+
 /** Lettura immediata, fuori da React (es. dopo un refresh). */
 export const getFairState = (): FairDataState => state;
 
 export function useFairData(): FairDataState {
-  return useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 /** Solo i dati derivati (booth numerati, layout). null finché non sono caricati. */
