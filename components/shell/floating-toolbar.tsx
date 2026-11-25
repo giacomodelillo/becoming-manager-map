@@ -16,23 +16,6 @@ export function FloatingToolbar() {
         icon={House}
         onClick={() => router.push("/")}
       />
-      <ToolbarButton
-        label="Timer"
-        icon={Timer}
-        onClick={() => {
-          // solo la colonna desktop: su mobile il pannello resta chiuso e il timer visibile
-          setDetailOpen(true);
-          router.push("/timer");
-        }}
-      />
-      {/*<ToolbarButton
-        label="Expo"
-        icon={LayoutGrid}
-        onClick={() => {
-          setDetailOpen(true);
-          router.push("/expo");
-        }}
-      />*/}
 
       {/* mostra/nascondi la colonna laterale: ha senso solo su desktop */}
       <div className="hidden items-center gap-1 lg:flex">

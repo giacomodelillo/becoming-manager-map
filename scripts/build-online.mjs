@@ -8,7 +8,7 @@
 //  2. cancella timer, area riservata, API e contenuti di esempio
 //  3. sovrascrive i file che online sono diversi, presi da scripts/online-overrides/
 //  4. toglie dal package.json le librerie che online non servono
-//  5. esporta data/expo.json e SOLO i loghi/immagini usati (src/data e public/media)
+//  5. esporta data/expo.json e SOLO i loghi/immagini usati (data e public/media)
 //  6. controlla che nessun file rimasto usi qualcosa che è stato cancellato
 import { cp, copyFile, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -28,8 +28,8 @@ if (target === root || target.startsWith(root + path.sep) || root.startsWith(tar
   console.error("La cartella online deve essere FUORI dal progetto locale (e non contenerlo).");
   process.exit(1);
 }
-if (!(await exists(path.join(root, "src", "app")))) {
-  console.error("Lancialo dalla radice del progetto locale (dove c'è la cartella src).");
+if (!(await exists(path.join(root, "app")))) {
+  console.error("Lancialo dalla radice del progetto locale (dove c'è la cartella app).");
   process.exit(1);
 }
 const existing = await readdir(target).catch(() => null);
@@ -62,23 +62,23 @@ for (const name of await readdir(root)) {
 // ---------- 2. cancellazioni ----------
 const REMOVE = [
   // area riservata e scritture
-  "src/app/admin", "src/app/@detail/admin", "src/app/api",
-  "src/components/admin",
-  "src/components/sections/admin-stage.tsx", "src/components/sections/admin-detail.tsx",
-  "src/lib/expo/server",
-  "src/lib/expo/admin-api.ts", "src/lib/expo/admin-store.ts", "src/lib/expo/config-ops.ts",
-  "src/lib/expo/validate.ts", "src/lib/expo/import.ts", "src/lib/expo/images.ts", "src/lib/expo/download.ts",
-  "src/lib/expo/data/default.ts",
+  "app/admin", "app/@detail/admin", "app/api",
+  "components/admin",
+  "components/sections/admin-stage.tsx", "components/sections/admin-detail.tsx",
+  "lib/expo/server",
+  "lib/expo/admin-api.ts", "lib/expo/admin-store.ts", "lib/expo/config-ops.ts",
+  "lib/expo/validate.ts", "lib/expo/import.ts", "lib/expo/images.ts", "lib/expo/download.ts",
+  "lib/expo/data/default.ts",
   // solo totem e telefono
-  "src/components/expo/use-idle-reset.ts", "src/components/expo/offline-badge.tsx", "src/components/expo/phone-qr.tsx",
+  "components/expo/use-idle-reset.ts", "components/expo/offline-badge.tsx", "components/expo/phone-qr.tsx",
   // timer
-  "src/app/timer", "src/app/@detail/timer", "src/lib/timer", "src/components/timer",
-  "src/components/sections/timer-stage.tsx", "src/components/sections/timer-detail.tsx",
+  "app/timer", "app/@detail/timer", "lib/timer", "components/timer",
+  "components/sections/timer-stage.tsx", "components/sections/timer-detail.tsx",
   // esempi del template
-  "src/app/items", "src/app/@detail/items", "src/lib/items.ts",
-  "src/components/sections/hero-section.tsx", "src/components/sections/item-grid.tsx",
-  "src/components/sections/home-stage.tsx", "src/components/sections/item-detail.tsx",
-  "src/components/sections/empty-detail.tsx",
+  "app/items", "app/@detail/items", "lib/items.ts",
+  "components/sections/hero-section.tsx", "components/sections/item-grid.tsx",
+  "components/sections/home-stage.tsx", "components/sections/item-detail.tsx",
+  "components/sections/empty-detail.tsx",
 ];
 for (const rel of REMOVE) await rm(path.join(target, rel), { recursive: true, force: true });
 
@@ -129,9 +129,9 @@ const files = new Set();
 for (const area of config.areas) {
   for (const c of area.companies) for (const f of [c.logo, c.logoDark, c.image]) if (f) files.add(f);
 }
-await mkdir(path.join(target, "src", "data"), { recursive: true });
+await mkdir(path.join(target, "data"), { recursive: true });
 await writeFile(
-  path.join(target, "src", "data", "expo-snapshot.json"),
+  path.join(target, "data", "expo-snapshot.json"),
   JSON.stringify({ version: saved.version ?? 1, exportedAt: new Date().toISOString(), config }, null, 2),
 );
 const mediaOut = path.join(target, "public", "media");
@@ -159,6 +159,7 @@ const BAD = [
 ];
 const problems = [];
 async function scan(dir) {
+  if (!(await exists(dir))) return;
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) await scan(full);
@@ -169,7 +170,9 @@ async function scan(dir) {
     }
   }
 }
-await scan(path.join(target, "src"));
+for (const dir of ["app", "components", "lib"]) {
+  await scan(path.join(target, dir));
+}
 
 // ---------- riepilogo ----------
 const companies = config.areas.reduce((n, a) => n + a.companies.length, 0);
