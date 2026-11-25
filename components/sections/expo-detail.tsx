@@ -17,15 +17,18 @@ export function ExpoDetail() {
       <PanelScale className="space-y-10">
         <header className="space-y-2">
           <p className="expo-eyebrow">Becoming Manager</p>
-          <h1 className="expo-serif text-4xl leading-tight">Costruisci il tuo percorso</h1>
+          <h1 className="expo-serif text-4xl leading-tight">
+            Costruisci il tuo percorso
+          </h1>
           <p className="text-base text-[var(--paper)]/75">
-            Scegli il tuo numero di partenza o tocca un&apos;azienda sulla mappa.
+            Scegli il tuo numero di partenza o tocca un&apos;azienda sulla
+            mappa.
           </p>
         </header>
+        <PhoneQr />
         <StudentPicker />
         <StepNav />
         <RouteList />
-        <PhoneQr />
         <CompanyList />
         <MapLegend />
         {/* sul totem l'area riservata non esiste */}

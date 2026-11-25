@@ -1,13 +1,77 @@
+import { Fragment } from "react";
 import { mediaUrl } from "@/lib/expo/media";
 import type { Company } from "@/lib/expo/types";
 import { CompanyLogo } from "./company-logo";
+
+// Riconosce URL con protocollo, domini che iniziano con "www." o email
+const LINK_REGEX =
+  /((?:https?:\/\/|www\.)[^\s<]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+
+const TRAILING_PUNCTUATION_REGEX = /[),.;:!?]+$/;
+
+function normalizeHref(rawMatch: string): {
+  href: string;
+  label: string;
+  trailing: string;
+} {
+  const match = rawMatch.match(TRAILING_PUNCTUATION_REGEX);
+  const trailing = match ? match[0] : "";
+  const label = trailing ? rawMatch.slice(0, -trailing.length) : rawMatch;
+
+  if (
+    label.includes("@") &&
+    !label.startsWith("http") &&
+    !label.startsWith("www.")
+  ) {
+    return { href: `mailto:${label}`, label, trailing };
+  }
+
+  const href = label.startsWith("www.") ? `https://${label}` : label;
+  return { href, label, trailing };
+}
+
+function LinkifiedText({ text }: { text: string }) {
+  const parts = text.split(LINK_REGEX);
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (!part) return null;
+
+        // Nei gruppi di cattura di .split(), le corrispondenze cadono su indici dispari
+        if (index % 2 === 1) {
+          const { href, label, trailing } = normalizeHref(part);
+          const isExternal = href.startsWith("http");
+
+          return (
+            <Fragment key={`${index}-${label}`}>
+              <a
+                href={href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                className="underline decoration-[var(--gold)] underline-offset-4 transition hover:text-[var(--gold)]"
+              >
+                {label}
+              </a>
+              {trailing}
+            </Fragment>
+          );
+        }
+
+        return <Fragment key={index}>{part}</Fragment>;
+      })}
+    </>
+  );
+}
 
 function Text({ title, text }: { title: string; text?: string }) {
   if (!text) return null;
   return (
     <section className="space-y-2">
       <h2 className="expo-eyebrow">{title}</h2>
-      <p className="whitespace-pre-line text-base leading-relaxed text-[var(--paper)]/90">{text}</p>
+      <p className="whitespace-pre-line break-words text-base leading-relaxed text-[var(--paper)]/90">
+        <LinkifiedText text={text} />
+      </p>
     </section>
   );
 }
@@ -18,9 +82,12 @@ function List({ title, items }: { title: string; items: string[] }) {
     <section className="space-y-2">
       <h2 className="expo-eyebrow">{title}</h2>
       <ul className="border-t border-white/15">
-        {items.map((item) => (
-          <li key={item} className="whitespace-pre-line border-b border-white/15 py-3 text-base">
-            {item}
+        {items.map((item, idx) => (
+          <li
+            key={`${idx}-${item}`}
+            className="whitespace-pre-line break-words border-b border-white/15 py-3 text-base"
+          >
+            <LinkifiedText text={item} />
           </li>
         ))}
       </ul>
@@ -63,7 +130,9 @@ export function CompanyCard({ company }: { company: Company }) {
       {company.notes && (
         <section className="space-y-1 border-l-4 border-[var(--magenta)] bg-white/5 p-4">
           <h2 className="expo-eyebrow">Note</h2>
-          <p className="whitespace-pre-line text-base">{company.notes}</p>
+          <p className="whitespace-pre-line break-words text-base">
+            <LinkifiedText text={company.notes} />
+          </p>
         </section>
       )}
     </article>

@@ -40,7 +40,7 @@ export function RouteList() {
                 <span className="expo-serif w-9 shrink-0 text-xl">{i + 1}°</span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate font-semibold">{company?.name}</span>
-                  <span className="block text-xs opacity-70">Booth {id}</span>
+                  <span className="block text-xs opacity-70">Postazione {id}</span>
                 </span>
               </button>
             </li>

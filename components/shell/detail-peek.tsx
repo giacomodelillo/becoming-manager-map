@@ -27,7 +27,10 @@ export function DetailPeek() {
         startY.current = e.clientY;
       }}
       onPointerMove={(e) => {
-        if (startY.current !== null && startY.current - e.clientY > SWIPE_UP_PX) {
+        if (
+          startY.current !== null &&
+          startY.current - e.clientY > SWIPE_UP_PX
+        ) {
           reset();
           setSheetOpen(true);
         }
@@ -35,7 +38,7 @@ export function DetailPeek() {
       onPointerUp={reset}
       onPointerCancel={reset}
       className={cn(
-        "bg-foreground/10 border-foreground/10 text-foreground/80 fixed left-1/2 z-30 flex h-11 -translate-x-1/2 touch-none items-center gap-1.5 rounded-full border px-4 text-sm font-medium backdrop-blur-xl transition-[opacity,scale] duration-300 lg:hidden",
+        "bg-background border-foreground/10 text-foreground/80 fixed left-1/2 z-30 flex h-11 -translate-x-1/2 touch-none items-center gap-1.5 rounded-full border px-4 text-sm font-medium  transition-[opacity,scale] duration-300 lg:hidden",
         "bottom-[max(1rem,env(safe-area-inset-bottom))]",
         sheetOpen && "pointer-events-none scale-95 opacity-0",
       )}

@@ -17,7 +17,7 @@ export function PhoneQr() {
     setOrigin(window.location.origin);
   }, []);
 
-  if (start === null || !view) return null;
+  if (start === 0 || !view) return null;
   const base = (view.display.publicUrl || origin).replace(/\/+$/, "");
   if (!base) return null;
   const unreachable = LOCAL.test(base);
@@ -33,16 +33,23 @@ export function PhoneQr() {
       </div>
       {unreachable ? (
         <p className="text-sm text-white/70">
-          Questo indirizzo non è raggiungibile dai telefoni. Chiedi a chi gestisce l&apos;evento di inserire
-          l&apos;indirizzo pubblico nell&apos;area riservata.
+          Questo indirizzo non è raggiungibile dai telefoni. Chiedi a chi
+          gestisce l&apos;evento di inserire l&apos;indirizzo pubblico
+          nell&apos;area riservata.
         </p>
       ) : (
         <div className="flex items-center gap-4">
           <div className="shrink-0 bg-white p-3">
-            <QRCodeSVG value={url} size={152} level="M" fgColor="#11071f" bgColor="#ffffff" />
+            <QRCodeSVG
+              value={url}
+              size={152}
+              level="M"
+              fgColor="#11071f"
+              bgColor="#ffffff"
+            />
           </div>
           <p className="text-sm text-white/75">
-            Inquadra il codice: sul telefono trovi il tuo percorso, partendo dal booth {start}.
+            Inquadra il codice: sul telefono trovi il tuo percorso, partendo dalla postazione {start}.
           </p>
         </div>
       )}

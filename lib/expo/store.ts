@@ -3,7 +3,7 @@ import { KIOSK } from "./kiosk";
 
 export type ExpoState = {
   /** Numero di partenza dello studente (null = nessun percorso) */
-  start: number | null;
+  start: number;
   /** Indice del passo corrente nel percorso (0-based) */
   stepIndex: number;
   /** Richiesta di centrare la mappa su un booth; `nonce` cambia a ogni richiesta */
@@ -13,7 +13,12 @@ export type ExpoState = {
 };
 
 const STORAGE_KEY = "expo:student";
-const INITIAL: ExpoState = { start: null, stepIndex: 0, focus: null, viewNonce: 0 };
+const INITIAL: ExpoState = {
+  start: 0,
+  stepIndex: 0,
+  focus: null,
+  viewNonce: 0,
+};
 
 let state: ExpoState = INITIAL;
 let nonce = 0;
@@ -65,7 +70,7 @@ export const expoStore = {
     set({ ...state, focus: { boothId, nonce } });
   },
   clearStudent() {
-    set({ ...state, start: null, stepIndex: 0 });
+    set({ ...state, start: 0, stepIndex: 0 });
     persist(null);
   },
   reset() {
@@ -75,5 +80,9 @@ export const expoStore = {
 };
 
 export function useExpoState(): ExpoState {
-  return useSyncExternalStore(expoStore.subscribe, expoStore.getState, () => INITIAL);
+  return useSyncExternalStore(
+    expoStore.subscribe,
+    expoStore.getState,
+    () => INITIAL,
+  );
 }

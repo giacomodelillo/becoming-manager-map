@@ -116,7 +116,7 @@ export function AdminEditor({ onLogout, onExpired, onReload }: Props) {
           <Eyebrow>Area riservata</Eyebrow>
           <h1 className="expo-serif text-4xl leading-tight">Gestione della mappa</h1>
           <p className="text-sm text-white/65">
-            {total} aziende · {draft.areas.length} aree. I numeri dei booth seguono l&apos;ordine qui sotto.
+            {total} aziende · {draft.areas.length} aree. I numeri delle postazioni seguono l&apos;ordine qui sotto.
             L&apos;anteprima si aggiorna mentre scrivi.
           </p>
         </div>
