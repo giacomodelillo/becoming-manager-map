@@ -1,21 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { useFairView } from "@/lib/expo/data-store";
 import { useExpoState } from "@/lib/expo/store";
 
 const LOCAL = /^https?:\/\/(localhost|127\.|0\.0\.0\.0|\[::1\])/i;
 
+const emptySubscribe = () => () => {};
+const getOriginSnapshot = () => window.location.origin;
+const getServerOriginSnapshot = () => "";
+
 /** QR per portare il percorso sul telefono. Solo su schermi grandi (il totem, il computer). */
 export function PhoneQr() {
   const { start } = useExpoState();
   const view = useFairView();
-  const [origin, setOrigin] = useState("");
-
-  useEffect(() => {
-    setOrigin(window.location.origin);
-  }, []);
+  const origin = useSyncExternalStore(
+    emptySubscribe,
+    getOriginSnapshot,
+    getServerOriginSnapshot,
+  );
 
   if (start === 0 || !view) return null;
   const base = (view.display.publicUrl || origin).replace(/\/+$/, "");
@@ -49,7 +53,8 @@ export function PhoneQr() {
             />
           </div>
           <p className="text-sm text-white/75">
-            Inquadra il codice: sul telefono trovi il tuo percorso, partendo dalla postazione {start}.
+            Inquadra il codice: sul telefono trovi il tuo percorso, partendo
+            dalla postazione {start}.
           </p>
         </div>
       )}

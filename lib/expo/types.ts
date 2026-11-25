@@ -19,6 +19,8 @@ export type Company = {
   contacts?: string;
   /** Azienda assente: il booth resta (il numero non cambia) ma esce da percorsi ed elenco */
   hidden?: boolean;
+  /** Postazione BUFFER: nessuna azienda, card rossa non selezionabile, fuori dai percorsi */
+  buffer?: boolean;
 };
 
 export type FlowDirection = "up" | "down";
@@ -28,7 +30,12 @@ export type ZoneTone = "gold" | "magenta" | "gray";
 
 export type FairColumn = {
   id: string;
+  /** Come sono disposti i numeri: "up" = il primo booth sta in basso */
   direction: FlowDirection;
+  /** Verso delle frecce (può essere opposto alla numerazione) */
+  arrows: FlowDirection;
+  /** Colonna sulla mappa, da sinistra (0) */
+  slot: number;
   /** Numeri dei booth nell'ordine di avanzamento */
   booths: number[];
   label?: string;
@@ -36,6 +43,10 @@ export type FairColumn = {
 };
 
 export type FairLayout = {
+  /** Ordine in cui si percorrono le aree (id): da qui le frecce tra una colonna e l'altra */
+  flow: string[];
+  /** Colonna sotto cui sta l'ingresso */
+  entranceSlot: number;
   /** Aree disegnate da destra a sinistra (la prima area è quella a destra) */
   rtl?: boolean;
   entranceLabel: string;
@@ -63,11 +74,19 @@ export type Area = {
   label: string;
   tone: ZoneTone;
   direction: FlowDirection;
+  /** Verso delle frecce, se diverso da `direction` */
+  arrows?: FlowDirection;
+  /** Colonna sulla mappa da sinistra (0, 1, 2...). Se manca: l'ordine delle aree */
+  slot?: number;
   /** In ordine di avanzamento. Il numero del booth è la posizione globale */
   companies: CompanyDraft[];
 };
 
 export type FairConfig = {
+  /** Ordine di percorrenza delle aree (id). Se manca: l'ordine delle aree */
+  flow?: string[];
+  /** Colonna sotto cui sta l'ingresso. Se manca: quella della prima area percorsa */
+  entranceSlot?: number;
   /** Aree disegnate da destra a sinistra */
   rtl?: boolean;
   timerLabel: string;

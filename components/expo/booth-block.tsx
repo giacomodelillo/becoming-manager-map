@@ -36,9 +36,12 @@ export function BoothBlock({
 }: Props) {
   const down = useRef<{ x: number; y: number } | null>(null);
   const absent = company.hidden === true;
-  const state = absent ? "absent" : current ? "current" : step === null ? "idle" : visited ? "visited" : "route";
+  const buffer = company.buffer === true;
+  const state = buffer ? "buffer" : absent ? "absent" : current ? "current" : step === null ? "idle" : visited ? "visited" : "route";
   const style = { "--d": `${delay}ms` } as CSSProperties;
-  const label = `Booth ${company.id}: ${company.name}${absent ? " (assente)" : ""}`;
+  const label = buffer
+    ? `Booth ${company.id}: buffer, da saltare`
+    : `Booth ${company.id}: ${company.name}${absent ? " (assente)" : ""}`;
 
   const content = (
     <>
@@ -47,14 +50,14 @@ export function BoothBlock({
       )}
       <span className="expo-pod-num">{company.id}</span>
       <span className="expo-pod-name">{company.name}</span>
-      {step !== null && !absent && <span className="expo-pod-step">{step + 1}°</span>}
+      {step !== null && !absent && !buffer && <span className="expo-pod-step">{step + 1}°</span>}
     </>
   );
 
-  // Nel pubblico un'azienda assente non è toccabile: resta solo il segnaposto
-  if (absent && !asButton) {
+  // Nel pubblico assenti e BUFFER non sono toccabili: resta solo il segnaposto
+  if ((absent || buffer) && !asButton) {
     return (
-      <div id={`booth-${company.id}`} className="expo-pod" data-state="absent" style={style} aria-label={label}>
+      <div id={`booth-${company.id}`} className="expo-pod" data-state={state} style={style} aria-label={label}>
         {content}
       </div>
     );

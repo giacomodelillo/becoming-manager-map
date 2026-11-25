@@ -108,18 +108,30 @@ export function CompanyCard({ company }: { company: Company }) {
           className="aspect-video w-full border border-white/15 object-cover"
         />
       )}
-      <header className="flex items-start gap-4">
-        <span
-          aria-label={`Booth ${company.id}`}
-          className="expo-serif flex size-14 shrink-0 items-center justify-center bg-[var(--gold)] text-3xl text-[var(--ink)]"
-        >
-          {company.id}
-        </span>
-        <div className="min-w-0 flex-1 space-y-1">
-          {company.sector && <p className="expo-eyebrow">{company.sector}</p>}
-          <h1 className="expo-serif text-3xl leading-tight">{company.name}</h1>
+      <header className="flex flex-col gap-4 sm:flex-row sm:items-start">
+        {/* Su mobile riga superiore con badge + logo; su desktop usa contents per mantenere il flex originale */}
+        <div className="flex items-center justify-between gap-4 sm:contents">
+          <span
+            aria-label={`Booth ${company.id}`}
+            className="expo-serif flex size-12 shrink-0 items-center justify-center bg-[var(--gold)] text-2xl text-[var(--ink)] sm:order-1 sm:size-14 sm:text-3xl"
+          >
+            {company.id}
+          </span>
+
+          <CompanyLogo
+            company={company}
+            className="h-11 max-w-28 shrink-0 sm:order-3 sm:h-14"
+          />
         </div>
-        <CompanyLogo company={company} className="h-14 max-w-28 shrink-0" />
+
+        <div className="min-w-0 flex-1 space-y-1 sm:order-2">
+          {company.sector && (
+            <p className="expo-eyebrow break-words">{company.sector}</p>
+          )}
+          <h1 className="expo-serif text-2xl leading-tight sm:text-3xl">
+            {company.name}
+          </h1>
+        </div>
       </header>
       <Text title="Profilo" text={company.description} />
       <Text title="Valori" text={company.values} />

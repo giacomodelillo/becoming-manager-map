@@ -81,6 +81,9 @@ export function parseFairConfig(input: unknown): FairConfig {
     const direction = DIRECTIONS.includes(a.direction as FlowDirection)
       ? (a.direction as FlowDirection)
       : "up";
+    const arrows = DIRECTIONS.includes(a.arrows as FlowDirection) ? (a.arrows as FlowDirection) : undefined;
+    const slot =
+      Number.isInteger(a.slot) && (a.slot as number) >= 0 && (a.slot as number) < 8 ? (a.slot as number) : undefined;
     let id = typeof a.id === "string" && a.id.trim() ? a.id.trim().slice(0, 40) : newKey();
     if (usedAreaIds.has(id)) id = newKey();
     usedAreaIds.add(id);
@@ -117,12 +120,29 @@ export function parseFairConfig(input: unknown): FairConfig {
         ...(contacts ? { contacts } : {}),
         ...(image ? { image } : {}),
         ...(c.hidden === true ? { hidden: true } : {}),
+        ...(c.buffer === true ? { buffer: true } : {}),
       };
     });
-    return { id, label, tone, direction, companies };
+    return {
+      id,
+      label,
+      tone,
+      direction,
+      ...(arrows ? { arrows } : {}),
+      ...(slot !== undefined ? { slot } : {}),
+      companies,
+    };
   });
 
   if (total > 99) throw new Error("Massimo 99 aziende");
+
+  const flow = Array.isArray(root.flow)
+    ? root.flow.filter((x): x is string => typeof x === "string").slice(0, 8)
+    : [];
+  const entranceSlot =
+    Number.isInteger(root.entranceSlot) && (root.entranceSlot as number) >= 0 && (root.entranceSlot as number) < 8
+      ? (root.entranceSlot as number)
+      : undefined;
 
   const config: FairConfig = {
     timerLabel: text(root.timerLabel, 20, "Etichetta timer") || "Timer",
@@ -130,6 +150,8 @@ export function parseFairConfig(input: unknown): FairConfig {
     areas,
     display: parseDisplay(root.display),
     ...(root.rtl === true ? { rtl: true } : {}),
+    ...(flow.length > 0 ? { flow } : {}),
+    ...(entranceSlot !== undefined ? { entranceSlot } : {}),
   };
   deriveFairView(config); // controllo finale di coerenza
   return config;

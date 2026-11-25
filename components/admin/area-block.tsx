@@ -84,7 +84,11 @@ function CompanyRow({
           <span
             className={cn(
               "expo-serif flex size-10 shrink-0 items-center justify-center text-xl",
-              company.hidden ? "bg-white/25 text-white/70" : "bg-[var(--paper)] text-[var(--ink)]",
+              company.buffer
+                ? "bg-[#c8283a] text-white"
+                : company.hidden
+                  ? "bg-white/25 text-white/70"
+                  : "bg-[var(--paper)] text-[var(--ink)]",
             )}
           >
             {number}
@@ -94,7 +98,7 @@ function CompanyRow({
               {company.name || "Senza nome"}
             </span>
             <span className="block truncate text-xs text-white/55">
-              {company.hidden ? "Assente" : company.sector || "Settore non indicato"}
+              {company.buffer ? "BUFFER" : company.hidden ? "Assente" : company.sector || "Settore non indicato"}
             </span>
           </span>
         </button>

@@ -23,6 +23,7 @@ export function MapLegend() {
         <Row icon={<span className="size-5 bg-[var(--gold)]" />} label="Passo corrente" />
         <Row icon={<span className="size-5 border-2 border-[var(--magenta)]" />} label="Passi del tuo percorso" />
         <Row icon={<span className="size-5 bg-white/30" />} label="Già visitato" />
+        <Row icon={<span className="size-5 bg-[#c8283a]" />} label="Buffer: si salta" />
       </ul>
     </section>
   );

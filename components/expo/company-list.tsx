@@ -9,7 +9,7 @@ import { useExpoRoute } from "./use-expo-route";
 /** Aziende presenti in ordine di booth: tocca per aprire la scheda. */
 export function CompanyList() {
   const { openBooth } = useExpoRoute();
-  const present = (useFairView()?.companies ?? []).filter((c) => !c.hidden);
+  const present = (useFairView()?.companies ?? []).filter((c) => !c.hidden && !c.buffer);
 
   return (
     <section aria-labelledby="companies-title" className="space-y-3">

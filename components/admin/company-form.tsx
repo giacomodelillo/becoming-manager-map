@@ -19,9 +19,15 @@ export function CompanyForm({
     <div className="space-y-4 border-t border-white/20 bg-black/20 p-4">
       <Toggle
         label="Azienda assente"
-        hint="La postazione resta sulla mappa con il suo numero, ma l'azienda esce da percorsi ed elenco."
+        hint="Il booth resta sulla mappa con il suo numero, ma l'azienda esce da percorsi ed elenco."
         checked={company.hidden === true}
         onChange={(hidden) => onChange({ hidden: hidden || undefined }, "push")}
+      />
+      <Toggle
+        label="Postazione BUFFER"
+        hint="Card rossa, non selezionabile: i percorsi la saltano."
+        checked={company.buffer === true}
+        onChange={(buffer) => onChange({ buffer: buffer || undefined }, "push")}
       />
       <TextField
         label="Nome azienda"

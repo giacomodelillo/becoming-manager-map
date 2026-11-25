@@ -65,7 +65,7 @@
 .expo-pod {
   position: relative;
   display: flex;
-  width: 128px;
+  width: 145px;
   height: 72px;
   flex-shrink: 0;
   align-items: center;
@@ -197,3 +197,15 @@
 .expo-pod[data-state="absent"] .expo-pod-num { background: var(--gray); }
 .expo-pod[data-state="absent"] .expo-pod-name { text-decoration: line-through; }
 .expo-pod[data-state="absent"]:active { transform: none; }
+
+/* postazione BUFFER: rossa, non selezionabile, si salta */
+.expo-pod[data-state="buffer"] {
+  background: #c8283a;
+  border-color: #8f1c29;
+  color: #fff;
+  box-shadow: 0 3px 0 #8f1c29;
+  cursor: default;
+}
+.expo-pod[data-state="buffer"] .expo-pod-num { background: #fff; color: #c8283a; box-shadow: none; }
+.expo-pod[data-state="buffer"] .expo-pod-name { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; }
+.expo-pod[data-state="buffer"]:active { transform: none; box-shadow: 0 3px 0 #8f1c29; }
