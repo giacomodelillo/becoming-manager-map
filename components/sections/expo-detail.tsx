@@ -12,7 +12,7 @@ import { KIOSK } from "@/lib/expo/kiosk";
 export function ExpoDetail() {
   return (
     <div
-      className={`${expoFontVars} expo-brand min-h-full bg-[var(--ink)] px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-6 text-[var(--paper)] lg:pt-28`}
+      className={`${expoFontVars} expo-brand min-h-full bg-[var(--ink)] px-0 pb-[max(2rem,env(safe-area-inset-bottom))] pt-6 text-[var(--paper)] lg:pt-28`}
     >
       <PanelScale className="space-y-10">
         <header className="space-y-2">

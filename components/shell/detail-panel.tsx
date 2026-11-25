@@ -72,7 +72,7 @@ export function DetailPanel({ children }: { children?: ReactNode }) {
       </div>
 
       {/* larghezza fissa su lg: il testo non si "riflowa" durante l'animazione */}
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pt-2 pb-[calc(env(safe-area-inset-bottom)+4rem)] lg:h-full lg:w-[50vw] lg:flex-none lg:px-8 lg:pt-6 lg:pb-24">
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pt-2 pb-[calc(env(safe-area-inset-bottom)+4rem)] lg:h-full lg:w-[50vw] lg:flex-none lg:px-8 lg:pt-6 lg:pb-24">
         {children}
       </div>
     </aside>
