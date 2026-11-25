@@ -1,0 +1,441 @@
+{
+  "version": 11,
+  "config": {
+    "timerLabel": "Timer",
+    "entranceLabel": "Ingresso",
+    "areas": [
+      {
+        "id": "sinistra",
+        "label": "Sinistra",
+        "tone": "gold",
+        "direction": "up",
+        "arrows": "up",
+        "slot": 0,
+        "companies": [
+          {
+            "key": "auxiell",
+            "name": "Auxiell",
+            "sector": "Consulenza",
+            "description": "auxiell è una società di consulenza specializzata nella trasformazione dei processi aziendali attraverso la metodologia Lean. Fondata nel 2005, affianca imprese e organizzazioni di diversi settori nell'analisi, nella riprogettazione e nel miglioramento dei processi, con l'obiettivo di aumentare le performance e creare valore per clienti, persone e organizzazioni.\n\nAttraverso il proprio framework proprietario, auxiell Lean System®, combina metodo scientifico, approccio pragmatico e coinvolgimento diretto delle persone per realizzare trasformazioni concrete e durature.",
+            "roles": [],
+            "requirements": [
+              "Cerchiamo persone curiose, concrete e orientate al miglioramento continuo, con voglia di imparare, spirito di iniziativa e attitudine al problem solving.",
+              "Valorizziamo la capacità di analizzare le situazioni, mettere in discussione le abitudini, collaborare con gli altri e lavorare per obiettivi. Sono importanti anche la flessibilità, le capacità comunicative e relazionali e la disponibilità a mettersi in gioco in contesti aziendali diversi.",
+              "Costituiscono un plus una formazione in ingegneria, economia o discipline affini, l'interesse per i processi aziendali e la metodologia Lean, una buona conoscenza dell'inglese e/o francese e la disponibilità a trasferte."
+            ],
+            "logoDark": "19428acc09c7.png",
+            "values": "Crediamo che il cambiamento parta dalle persone e che i risultati migliori nascano dalla capacità di lavorare insieme, mettersi in gioco e migliorare continuamente. Ci guidano valori come la creazione di valore, il pensiero scientifico, il pragmatismo, il fair play, il coraggio di alzare l'asticella e la capacità di imparare attraverso i feedback.\n\nInvestiamo nella crescita dei nostri talenti, promuovendo un ambiente inclusivo, collaborativo e orientato allo sviluppo professionale e personale. Il nostro obiettivo è essere ogni giorno un esempio, per i clienti e per le persone con cui lavoriamo.",
+            "opportunities": "Entrare in auxiell significa intraprendere un percorso professionale dinamico, lavorare a fianco di aziende di diversi settori e contribuire a progetti di trasformazione con risultati concreti e misurabili.\n\nOffriamo percorsi di onboarding e formazione continua, coaching e opportunità di crescita personalizzate. Cerchiamo persone curiose, desiderose di mettersi alla prova e motivate a sviluppare competenze analitiche, gestionali e relazionali, partecipando attivamente al miglioramento dei processi e delle organizzazioni.",
+            "contacts": "https://www.auxiell.com/lavora-con-noi"
+          },
+          {
+            "key": "adacta",
+            "name": "Adacta",
+            "sector": "Consulenza · Partner",
+            "description": "Siamo partner delle imprese che affrontano con determinazione le sfide del mercato. Ci impegniamo a sostenere le organizzazioni mettendo a disposizione le nostre competenze manageriali per la definizione e l’attuazione di piani strategici ambiziosi che abilitino alla crescita e al miglioramento delle performance. \n\nCi distinguiamo per un approccio rigoroso ed analitico, un’ampia conoscenza delle Industry e un focus costante al raggiungimento dei risultati.     \n\nAffianchiamo le aziende per raggiungere il loro massimo potenziale attraverso l’implementazione di attività di Corporate Finance, Strategy & Organization, Planning & Controlling, supportando le direzioni aziendali nell’adozione di nuove tecnologie tenendo la linea della sostenibilità come guida al cambiamento.    \n\nLe attività di Adacta Advisory sono sempre guidate da un senior management con una profonda conoscenza del mercato e da team all’interno dei quali il coinvolgimento dei giovani talenti è un valore fondamentale.",
+            "roles": [],
+            "requirements": [
+              "Ricerchiamo giovani appassionati che apportino motivazione ed entusiasmo.",
+              "Sono requisiti preferenziali:",
+              "- Laurea magistrale in economia o ingegneria gestionale",
+              "- Standing professionale",
+              "- Propensione al team working",
+              "- Buona conoscenza della lingua inglese",
+              "- Mindset analitico",
+              "- Passione per l’innovazione, la tecnologia, ​la digital transformation."
+            ],
+            "logoDark": "74efa412941f.png",
+            "values": "Crediamo fermamente nel valore delle persone e nella loro capacità di ispirare e motivare l'intera organizzazione, apportando costantemente entusiasmo e innovazione. Puntiamo a consolidare la nostra posizione come società di consulenza di riferimento per le migliori organizzazioni, distinguendoci per la nostra capacità di ottenere risultati. Il nostro obiettivo è generare valore in modo continuativo per le organizzazioni con cui collaboriamo, nonché per la nostra stessa realtà, attraverso l'adozione di soluzioni tecnologiche all'avanguardia e lo sviluppo di nuovi framework aziendali.",
+            "opportunities": "In Adacta Advisory assicuriamo:  \n\n- Ambiente lavorativo professionale e dinamico, caratterizzato da progetti sfidanti ad alta complessità e contenuto innovativo, con la possibilità di interagire direttamente con la Direzione aziendale, Imprenditori e Top Management di riferimento. \n\n- Training & Onboarding: accogliamo i nuovi membri con un programma di formazione strutturato, accompagnandoli in un percorso di crescita stimolante, caratterizzato da obiettivi definiti e condivisi fin dall’inizio. \n\n- Progetto di tesi in azienda: offriamo l’opportunità di entrare in Adacta Advisory anche per la stesura della tesi così da offrire soluzioni su misura.   \n\n- Benefit: smart working, formazione continua, weekend aziendali.",
+            "contacts": "Beatrice Baldo\nb.baldo@adacta.it\n+39 352 026 3659"
+          },
+          {
+            "key": "pwc",
+            "name": "PwC",
+            "sector": "Consulenza · Partner",
+            "description": "In PwC trasformiamo le tue competenze in modi nuovi e inaspettati per dare spazio a punti di vista sempre innovativi e costruire una community diversificata in cui tutti si sentano accolti, visti e ascoltati. Siamo un network internazionale, presente in 136 paesi, con un gruppo di oltre 365.000 professionisti che hanno l’obiettivo di creare fiducia per i propri clienti attraverso la costruzione di solide relazioni basate su integrità. In Italia siamo più di 9000 persone in 27 città. Affrontiamo ogni sfida guidati dalla passione e dai valori, usando le tecnologie più avanzate per raggiungere risultati sempre più integrati e per costruire un futuro sostenibile",
+            "roles": [],
+            "requirements": [
+              "I protagonisti del nostro futuro hanno una laurea in economia, ingegneria o giurisprudenza, un buon livello di inglese e soprattutto hanno desideri e ambizioni uniche e alcune caratteristiche comuni:",
+              "- Empatia da team worker",
+              "- Abilità di pensare fuori dagli schemi",
+              "- Sete di sapere, per non smettere mai di imparare",
+              "- Passione per l’innovazione con cui realizzare soluzioni inedite",
+              "- Un approccio pragmatico e versatile per misurarsi con la complessità",
+              "- Motivazione per vedere in ogni traguardo il punto di partenza di una nuova avventura",
+              "Ogni storia di successo ha bisogno dei presupposti giusti per cominciare!"
+            ],
+            "logo": "0bf51f9b244f.jpg",
+            "values": "Operare con integrità, Fare la differenza, Avere cura, Lavorare insieme e Reimmaginare i limiti del possibile. In PwC abbiamo background e culture diverse, ma siamo tutti accomunati da questi valori e comportamenti.\n\nEssi racchiudono le nostre aspirazioni e aspettative, ci guidano nelle nostre azioni quotidiane, nelle nostre scelte e nel come agiamo con i clienti e con i colleghi.\n\nCi aiutano a fare del nostro meglio.",
+            "opportunities": "Tu sei l'architetto del tuo successo. Costruiamo qualcosa di grande insieme.\n\nLa passione che mettiamo nel nostro lavoro viene alimentato dai giovani talenti che scelgono di unirsi alla nostra squadra.\n\nOffriamo attenzione al tuo impegno tanto quanto al tuo benessere perché vogliamo far crescere le tue prospettive e far emergere la tua leadership in un ambiente flessibile e accogliente dove lavorare e vivere al meglio.\n\nPotrai prendere parte a percorsi di sviluppo disegnati su misura per te e parteciperai, guidato dai migliori professionisti, a progetti ambiziosi per dare al possibile prospettive inedite e supportare grandi aziende.",
+            "contacts": "Servizi Aziendali PricewaterhouseCoopers S.r.l\nPiazza Tre Torri, 2\nit_digitalevents@pwc.com\nhttps://www.pwc.com/it/it/careers.html"
+          },
+          {
+            "key": "sintesia",
+            "name": "Sintesia",
+            "sector": "Consulenza · Partner",
+            "description": "Sintesia è una società di esperti di Lean Manufacturing e Lean Organization. \nLavoriamo nelle aziende per apportare innovazione, efficienza, collaborazione e miglioramento continuo. Ci piace snellire le procedure, abbattere i tempi morti, ridurre la sovrapproduzione. E molto altro.\nLo facciamo coltivando la filosofia Lean, seguendo un metodo, marchiato Sintesia e usando i nostri strumenti, che sono anche divertenti. Ma soprattutto, mettendo le persone al centro del nostro lavoro: clienti, collaboratori e partner. Perché oltre il metodo, le tecniche e gli strumenti, è il capitale umano il vero motore dell’evoluzione aziendale!",
+            "roles": [],
+            "requirements": [
+              "Cerchiamo persone con una laurea a indirizzo ingegneristico o economico, o con un percorso che abbia dato solide basi per muoversi tra processi, numeri e contesti produttivi.",
+              "Conta molto la curiosità: quella di chi, entrando in un’azienda, si chiede come funziona tutto, come si muovono i materiali, come sono organizzati i reparti, perché certe cose si fanno in un modo e non in un altro. È fondamentale un interesse concreto per la produzione, la logistica, l’industrializzazione o la consulenza in ambito produttivo.",
+              "Il ruolo è on site per definizione, per questo è richiesta la disponibilità a trasferte brevi ma frequenti, prevalentemente in Italia e occasionalmente all’estero. Lavorando anche con interlocutori internazionali, l’inglese, scritto e parlato, è uno strumento quotidiano da padroneggiare con sicurezza.",
+              "Infine, diamo molta importanza alle capacità di ascolto e di analisi. Ogni azienda è un mondo a sé: saper fare le domande giuste, osservare con attenzione e collegare i puntini velocemente è parte essenziale del ruolo. Se ti piace lavorare in ambienti sempre diversi, sei nel posto giusto!"
+            ],
+            "logo": "bc2d4480fb91.png",
+            "values": "Crediamo che il vero cambiamento nasca dalle persone. Per questo lavoriamo con un approccio Human to Human: partiamo dall’ascolto di chi vive i processi ogni giorno e costruiamo le soluzioni insieme a loro. Ci muoviamo con concretezza e spirito innovativo, senza paura di proporre strade non convenzionali, e non smettiamo mai di formarci, perché il miglioramento continuo vale prima di tutto per noi.",
+            "opportunities": "Offriamo opportunità di stage (anche per lo svolgimento della tesi) a neolaureati e laureandi che vogliono entrare nel nostro team di consulenza e lavorare a progetti di trasformazione Lean presso aziende di tutti i settori.\n\nÈ un ruolo operativo e relazionale, che si svolge sul campo, nel gemba: la maggior parte del tempo si trascorre presso i clienti. I nostri consulenti seguono i progetti a partire dall’analisi iniziale fino al consolidamento dei risultati. Studiano i processi produttivi, logistici e d’ufficio, riprogettano e implementano le soluzioni. Affiancano team interfunzionali lato cliente, dalla produzione agli acquisti fino alla direzione, guidandoli nel processo di trasformazione. \n\nOgni consulente può contare sempre sul supporto della squadra. La crescita è favorita dall’affiancamento a consulenti senior, da formazione teorica e sul campo e da percorsi di sviluppo dedicati.",
+            "contacts": "hr@sintesia.com"
+          },
+          {
+            "key": "considi",
+            "name": "Considi",
+            "sector": "Consulenza · Partner",
+            "description": "Considi, con sede a Grisignano di Zocco (VI), Milano e Brescia, sul mercato dal 1980, è una delle principali società Italiane di consulenza nel settore Operation & Innovation Management, specializzata nei servizi legati al Toyota Production System e alla Lean Organization. Considi aiuta le Imprese in Italia e all’estero ad incrementare la competitività applicando i principi del Sistema Toyota/LEAN verso una crescita sostenibile anche grazie alle opportunità tecnologiche di Industria 4.0. Considi è Partner esclusivo per l’Italia di Toyota Academy e Partner esclusivo per l’Europa di Toyota Engineering Corporation (TEC) e più recentemente ha contribuito ad attivare Smart Operating Model Lab (SOM Lab) - un Think Tank del Lean Center di CUOA Business School – che ha la missione di accrescere e diffondere la cultura e le competenze legate agli Smart Operating Models – ossia i modelli operativi di produzione e distribuzione che fondono l’Operational Excellence, le nuove tecnologie digitali e i sistemi agili di gestione dell’innovazione – attraverso la promozione di ricerche scientifiche in imprese manifatturiere e di servizi.",
+            "roles": [],
+            "requirements": [
+              "Valutiamo favorevolmente lauree STEM con ottimi voti e inglese fluente. Apprezziamo chi si è messo in gioco nel mondo della consulenza o in aziende industriali strutturate e ha una predilezione per le logiche dell'approccio e gli strumenti Lean.",
+              "Se a questo aggiungi passione, dinamismo e spirito imprenditoriale contattaci."
+            ],
+            "logoDark": "9b334ffefb06.png",
+            "values": "Intraprendenza, Consapevolezza del proprio ruolo, Solidarietà, Onestà, Coraggio sono i valori fondanti di Considi. Il team del Gruppo Considi è costituito da professionisti specializzati, preparati ed affiatati con particolare attenzione alla valorizzazione di ogni singola professionalità e personalità.",
+            "opportunities": "Entrando nel Team Considi avrai l’occasione di crescere e sviluppare ulteriormente le tue competenze. \nPotrai portare da subito il tuo contributo su progetti in Italia e all’estero con un ruolo coerente alla tua esperienza. \nLavorerai a stretto contatto con giovani brillanti colleghi e con professionisti di grande esperienza. \nAvrai la possibilità di operare in aree, industry e realtà molto differenti. Troverai un ambiente solidale e altamente professionale.",
+            "contacts": "Considi spa \nVia Alcide De Gasperi 63, 63040 Grisignano di Zocco Tel. 0444 189821 \ninfo@considi.it"
+          },
+          {
+            "key": "pietro-fiorentini",
+            "name": "Pietro Fiorentini",
+            "sector": "Energia/Ambiente",
+            "description": "We value resources. Together, today and for future generations.\n\nQuesta è la ragione per cui esistiamo come organizzazione. È un impegno concreto che guida ogni azione e decisione che prendiamo, un faro che illumina il nostro cammino mentre ci adattiamo alle dinamiche mutevoli del mercato e della società. Siamo una learning organization e la crescita continua fa parte del nostro DNA: questo significa che le persone che ne fanno parte imparano costantemente, usando l’esperienza diretta per ampliare il proprio bagaglio di conoscenze. Offriamo percorsi personalizzati per ogni dipendente, creati secondo inclinazioni, aspirazioni ed esigenze dettate dalla mansione ricoperta sulla base delle richieste attuali e future. L’obiettivo è rendere le persone più preparate e motivate, pronte ad affrontare le sfide del mondo moderno. Con oltre 80 anni di esperienza lungo tutta la filiera del gas naturale, abbiamo esteso i nostri orizzonti verso lo sviluppo di tecnologie e soluzioni per un mondo digitale e sostenibile.",
+            "roles": [],
+            "requirements": [],
+            "logo": "9a4d8129c96b.jpg",
+            "values": "Ogni giorno ci troviamo davanti a scelte che hanno il potere di condizionare il futuro della nostra Azienda e delle persone che lavorano con noi. A guidarci in queste decisioni sono i pensieri e le idee a cui ci ispiriamo, che si concretizzano nei valori e nei principi sui quali si basa la nostra cultura aziendale. I nostri valori sintetizzano ciò che consideriamo importante come Azienda e svolgono un ruolo chiave nello stabilire le condizioni per lavorare in modo collaborativo, sia internamente che con i nostri partner. Sono invece i principi a essi collegati a darci le indicazioni da rispettare per metterli in pratica in ogni azione quotidiana. I nostri valori: eccellenza, affidabilità, comunicazione, impegno, innovazione, lavoro di gruppo, rispetto e sincerità.",
+            "opportunities": "Come azienda siamo sempre alla continua ricerca di persone interessate ad effettuare percorsi entusiasmanti di tesi e stage con noi, in ambiti quali il Kaizen Promotion Office (Team dedicato al miglioramento continuo in ottica lean production), così come l'Ufficio Tecnico e Progettazione (meccanica, meccatronica, chimica). Nel corso degli anni abbiamo accolto e supportato più di 30 studenti e studentesse durante il percorso di strutturazione della tesi, partecipando ad un percorso di stage che poi si è spesso trasformato in una opportunità diretta di lavoro. Abbiamo anche molte ricerche aperte e ogni mese puoi trovare la situazione aggiornata al seguente link https://www.fiorentini.com/it/lavorare-in-pietro-fiorentini/posizioni-aperte/.\n\nPietro Fiorentini è una learning organization e la crescita continua fa parte del nostro DNA: questo significa che le persone che ne fanno parte imparano costantemente, dai successi ma anche dai fallimenti, usando l'esperienza diretta e quella dei colleghi per ampliare il proprio bagaglio di conoscenze. Offriamo percorsi personalizzati per ogni dipendente, creati secondo inclinazioni, aspirazioni ed esigenze dettate dalla mansione ricoperta sulla base delle richieste attuali e future. L’obiettivo è rendere le persone più preparate e motivate, pronte ad affrontare le sfide del mondo moderno.",
+            "contacts": "Pietro Fiorentini Spa\nSede Legale - via E. Fermi 8/10, Arcugnano (VI)\nContatto diretto: hr@fiorentini.com\nhttps://www.fiorentini.com/it/"
+          },
+          {
+            "key": "dab-pumps",
+            "name": "DAB Pumps",
+            "sector": "Energia/Ambiente",
+            "description": "We are DAB. Our ambition is enhancing life by making water easy.\n\nWe are a multinational specializing in the production of water pumping systems that are easy to use and install. Sustainability, reliability and innovation are hallmarks of our technologies, designed specifically for people who live, design and build in the field of domestic, residential, institutional and commercial applications and in agricultural irrigation systems.",
+            "roles": [],
+            "requirements": [
+              "Bachelor's or Master's degree in Management Engineering, Business Administration, Economics, Social Sciences, Humanities, or a related field;",
+              "Fluent written and spoken English;",
+              "Basic understanding of Agile methodologies and Lean or willingness to learn;",
+              "Ability to adapt to a dynamic and fast-paced work environment;",
+              "Genuine interest in organizational transformation and driving positive change;",
+              "Adaptability and willingness to take on new challenges."
+            ],
+            "logo": "5dab40bdc958.jpg",
+            "values": "SUSTAINABILITY: We act driven by awareness and focus on people and on planet’s challenges.\n\nTRUST: We generate trust by communicating openly and transparently.\n\nPEOPLE: We preserve an inclusive workplace where people feel good.\n\nINDEPENDENCY: We aim for a solid financial basis, enabling us to invest in our values.\n\nPARTNERSHIP: We strongly believe in a professional partnership, driven by ethical principles.\n\nAMBITION: We keep challenging ourselves in order to lead the market through innovative solutions.",
+            "opportunities": "• Continuous Improvement & Project Facilitation Internship;\n• Technical Pre Sales Internship;\n• Operations Excellence Internship.",
+            "contacts": "DAB Pumps S.p.A.\nvia Marco Polo 14, 35035, Mestrino (PD)\nhr@dabpumps.com\nhttps://careers.dabpumps.com/jobs.php?page=1"
+          },
+          {
+            "key": "moncler",
+            "name": "Moncler",
+            "sector": "Moda",
+            "description": "Moncler nasce nel 1952 a Monestier-de-Clermont, un piccolo villaggio di montagna vicino a Grenoble, con una specializzazione iniziale nell’abbigliamento sportivo destinato all’ambiente alpino.\n\nNel 2003, Remo Ruffini acquisisce Moncler e avvia un importante percorso di riposizionamento del marchio. Grazie a questa trasformazione, il brand assume uno stile sempre più distintivo ed esclusivo, evolvendosi da produttore di capi pensati esclusivamente per la pratica sportiva a creatore di collezioni versatili, adatte a persone di ogni genere, età, identità e cultura e indossabili in qualsiasi occasione. In questo percorso, l’outerwear, pur rimanendo la categoria simbolo e più rappresentativa del brand, viene progressivamente affiancato e integrato da una gamma sempre più ampia di prodotti complementari.\n\nSotto la guida di Remo Ruffini, Moncler persegue una filosofia orientata alla creazione di prodotti unici, di altissima qualità, versatili e in continua evoluzione, senza mai perdere il legame con il proprio DNA. Questa visione è racchiusa nel motto: “Born in the mountains, living in the city”.\n\nTradizione, unicità, qualità, coerenza ed energia rappresentano da sempre i valori distintivi di Moncler. Nel corso degli anni, il brand è riuscito a evolversi e rinnovarsi costantemente, mantenendo al contempo la propria identità, il proprio patrimonio e la propria eredità. Questo percorso si sviluppa attraverso una continua ricerca di dialogo aperto con la propria comunità di consumatori in tutto il mondo.",
+            "roles": [],
+            "requirements": [],
+            "logoDark": "6d418d93d895.jpg",
+            "values": "In Moncler, crediamo nell’importanza di valorizzare appieno il potenziale della tua passione. Promuoviamo la creatività e ti incoraggiamo a trasformare idee ambiziose in realtà, ridefinendo continuamente ciò che è possibile e stabilendo nuovi standard di eccellenza. Guidati dalla curiosità e dall’ambizione, superiamo costantemente i confini del possibile per offrire risultati straordinari in tutto ciò che facciamo.\n\nValorizziamo la diversità di prospettive e incoraggiamo ciascuno a pensare in modo originale. Quando voci ed esperienze differenti si incontrano, l’innovazione prospera. In Moncler, l’individualità viene celebrata e ogni persona è incoraggiata a esprimere la versione migliore di sé, contribuendo a una cultura in cui creatività, crescita personale e sviluppo professionale possono davvero fiorire.\n\nQuando si punta alle vette più alte, ogni passo avanti è il riflesso della propria determinazione. Ogni intuizione, sfida affrontata e lezione appresa diventa una base solida su cui costruire qualcosa di straordinario.\n\nChe tu stia superando i tuoi limiti o esplorando nuove opportunità professionali, mettiamo a tua disposizione gli strumenti, l’ispirazione e l’ambiente giusto per aiutarti a crescere, esprimere il tuo potenziale e costruire un percorso unico e significativo.",
+            "opportunities": "Entrare in Moncler significa avere l’opportunità di crescere in un contesto internazionale, dinamico e in continua evoluzione, dove passione, curiosità e spirito d’iniziativa vengono valorizzati ogni giorno. Offriamo percorsi di sviluppo che permettono di acquisire competenze trasversali e specialistiche, collaborando con team diversi e contribuendo a progetti concreti fin dall’inizio del proprio percorso. In Moncler, ogni persona è incoraggiata a esprimere il proprio talento, ad ampliare le proprie conoscenze e a costruire una carriera unica, supportata da un ambiente inclusivo, stimolante e orientato all’eccellenza.",
+            "contacts": "Ragione sociale: Industries S.p.A.\nSede legale: Via Stendhal 47, 20144 Milano (MI), Italia\nTelefono: +39 02 42203500\nWebsite: www.monclergroup.com/it\nCareers: jobs.monclergroup.com\nInstagram: @moncler\nLinkedin: Moncler"
+          },
+          {
+            "key": "buffer-9",
+            "name": "BUFFER",
+            "sector": "",
+            "description": "",
+            "roles": [],
+            "requirements": [],
+            "buffer": true
+          }
+        ]
+      },
+      {
+        "id": "centro",
+        "label": "Centro",
+        "tone": "magenta",
+        "direction": "down",
+        "arrows": "down",
+        "slot": 1,
+        "companies": [
+          {
+            "key": "impresoft",
+            "name": "Impresoft",
+            "sector": "Start-up",
+            "description": "In Impresoft Engage parte di Impresoft Group, aiutiamo le aziende, in ambito B2B e B2C, a costruire e mantenere relazioni di valore con i propri clienti attraverso CRM, Marketing Automation, siti web, E-commerce, Intelligenza Artificiale e soluzioni di Customer Service.\n\nImplementiamo le principali piattaforme a livello mondiale – HubSpot, Salesforce, Microsoft Dynamics 365, SugarCRM, Zoho e monday.com – e sviluppiamo soluzioni proprietarie come forSales. Lavoriamo in settori molto diversi, dal manifatturiero ai servizi, dall'assicurativo all'automotive, affiancando sia grandi brand internazionali sia le principali aziende italiane.\n\nIn Impresoft Engage i team di lavoro sono un puzzle in cui ogni persona è una tessera fondamentale per il successo dei progetti.",
+            "roles": [],
+            "requirements": [
+              "Cerchiamo laureandi e neolaureati in discipline economiche, ingegneristiche, informatiche e affini, con curiosità per la tecnologia e per i processi aziendali. Le caratteristiche che apprezziamo di più sono:",
+              "● autonomia e spirito di iniziativa",
+              "● orientamento al cliente e capacità di ascolto",
+              "● lavorare per obiettivi e distinguere le priorità",
+              "● pianificare le attività",
+              "● lavoro in team",
+              "● imparare dagli errori",
+              "● fare domande",
+              "● buona conoscenza della lingua inglese"
+            ],
+            "logoDark": "67e58a447a90.png",
+            "values": "Stronger Together\nCi piace giocare di squadra, con metodo scientifico e ritmo, per vincere. Amiamo costruire relazioni durevoli basate sulla fiducia e lavoriamo costantemente sulla fiducia interna per creare fiducia esterna, verso il cliente. Non siamo mai stanchi di accrescere le nostre competenze e di diffondere la conoscenza a beneficio di colleghi e partner.\n\nYour Digital Boost\nLa nostra promessa è essere l'acceleratore digitale delle aziende clienti. Siamo appassionati di innovazione e generatori di entusiasmo: miriamo ad assumere sempre un atteggiamento positivo anche di fronte a condizioni sfidanti. Ci alleniamo ad essere innovativi, affamati e appassionati, divertendoci.\n\nWe Drink Our Own Champagne\nCerchiamo di creare valore per le persone, le aziende e il sistema Paese. Come consulenti esperti, guidiamo le aziende verso un impatto reale e sostenibile grazie al digitale. I prodotti e servizi che implementiamo sono il risultato degli elevati standard professionali ed etici che perseguiamo internamente, come dimostrano le certificazioni ISO 9001, 27001, 27017 e 27018.",
+            "opportunities": "Cerchiamo giovani talenti da inserire in un percorso di stage in ambito Consulenza CRM & AI, nelle sedi di Vicenza, Mira (VE) e Milano.\n\nEntrerai in un team di consulenti e sviluppatori, seguito da un tutor dedicato, e lavorerai su progetti di CRM e Customer Experience in cui l'Intelligenza Artificiale ha un ruolo sempre più centrale. Durante lo stage potrai:\n● affiancare il team nella gestione dei progetti, dalla progettazione fino alla consegna al cliente\n● analizzare i processi aziendali e tradurre le esigenze del cliente in soluzioni software, individuando dove l'AI può portare valore\n● imparare a configurare le piattaforme CRM e le relative funzionalità di AI\n● usare strumenti di AI generativa a supporto della consulenza\n● partecipare alle sessioni di training verso i clienti\n\nCosa offriamo:\n● stage di 6 mesi finalizzato all'inserimento in azienda\n● rimborso spese di 600 euro mensili e ticket restaurant da 8 euro per ogni giornata lavorata\n● corsi di formazione e obiettivi SMART\n● ambiente collaborativo e dinamico, dove ognuno è libero di proporre idee e soluzioni\n● lavoro flessibile tra smart working e ufficio\n● welfare aziendale",
+            "contacts": "Impresoft Engage S.r.l. – parte di Impresoft Group\nVia Vecchia Ferriera, 5 – 36100 Vicenza (VI)\nT. +39 0444 189826"
+          },
+          {
+            "key": "valbruna",
+            "name": "Valbruna",
+            "sector": "Metalmeccanico",
+            "description": "Fondata nel 1925, Acciaierie Valbruna S.p.A. è una società privata a capo di un Gruppo che conta oltre 2.800 dipendenti ed offre sul mercato globale 300.000 tonnellate annue di Acciai inossidabili e Leghe di Nichel in prodotti lunghi. Con il 30% della produzione destinato al mercato interno e il 70% a quello estero, il Gruppo Valbruna è fortemente internazionalizzato, garantendo una capillare presenza commerciale nei mercati di riferimento in Italia e nel mondo, grazie ad una rete distributiva di 43 filiali presenti in Europa, America, Asia, Australia e Sudafrica. La produzione avviene in quattro stabilimenti verticalmente integrati, di cui due in Italia (Vicenza e Bolzano), uno negli USA ed uno in Canada. Quest’ultimo, denominato Valbruna ASW, è stato acquisito dal Gruppo nel 2019 ed è situato a Welland in Ontario. Valbruna ASW produce sul territorio Nordamericano anche acciai al carbonio e basso legati, oltre che inossidabili, permettendo un significativo completamento della gamma di prodotti offerti.\n\nGrazie al costante aggiornamento del “know-how” aziendale, il Gruppo Valbruna, con oltre 100 anni di esperienza nel campo degli acciai, rappresenta oggi un importante punto di riferimento del settore siderurgico internazionale, con l’obiettivo di soddisfare mercati sempre più esigenti come ad esempio quello alimentare, aeronautico, aerospaziale, automobilistico, meccanico, chimico, petrolchimico, energetico, medicale, navale e molti altri",
+            "roles": [],
+            "requirements": [
+              "Cerchiamo persone motivate, curiose e desiderose di affrontare nuove sfide, che sappiano coniugare precisione, affidabilità e senso di responsabilità con spirito di iniziativa e predisposizione al lavoro di squadra.",
+              "Valbruna offre l'opportunità di sviluppare le proprie capacità attraverso un percorso di apprendimento continuo e crescita professionale. Una buona conoscenza dell'inglese e dimestichezza con gli strumenti informatici completano il profilo."
+            ],
+            "logo": "12a309c419f3.png",
+            "values": "Storia, esperienza e tradizione rappresentano il patrimonio su cui Valbruna ha costruito la propria identità. Una realtà che, grazie a una leadership visionaria, alla passione per il proprio lavoro e alla capacità di cogliere nuove opportunità, continua a guardare al futuro con ambizione, perseguendo obiettivi sempre più sfidanti.",
+            "opportunities": "Entrare in Valbruna significa far parte di una realtà dinamica e altamente specializzata, collaborando con team qualificati e contribuendo attivamente a progetti e iniziative in un contesto tecnologicamente evoluto.\n\nL'azienda investe costantemente nel miglioramento dei processi, nell'efficienza produttiva e nella ricerca e sviluppo, promuovendo l'acquisizione di nuove conoscenze e il consolidamento delle competenze tecniche.\n\nLavorare in Valbruna offre l'opportunità di confrontarsi quotidianamente con impianti all'avanguardia e tecnologie avanzate, entrando in contatto con il know-how di un'azienda leader nel settore degli acciai inossidabili, costruito attraverso un secolo di esperienza.",
+            "contacts": "Acciaierie Valbruna S.p.A.\nViale della Scienza, 25 – 36100 VICENZA\nT. +39 0444 968211\nrisorse.umane@valbruna.it\nwww.valbruna-stainless-steel.com"
+          },
+          {
+            "key": "beltrame",
+            "name": "Beltrame",
+            "sector": "Metalmeccanico",
+            "description": "AFV Beltrame Group opera nel settore siderurgico da più di un secolo (1896) producendo laminati destinati alle costruzioni edili, alla cantieristica navale e alle macchine movimentazione terra. AFV Beltrame Group ha raggiunto il primato italiano e in seguito la leadership europea nel proprio comparto grazie alla continua tensione innovativa e alla secolare cultura della produttività e della qualità. Caratteristiche che hanno portato il Gruppo ad operare scelte strategiche tese al costante raggiungimento di imprescindibili obbiettivi, quali: la qualità del prodotto, la sostenibilità ambientale, la sicurezza del lavoratore e il risparmio energetico. Oggi, con 3.000 dipendenti, 7 stabilimenti situati in Italia, Francia, Svizzera e Romania, 12 laminatoi e 4 acciaierie a forno elettrico (più green rispetto al carbone) il Gruppo serve circa 40 paesi in tutta Europa. AFV Beltrame Group possiede inoltre 12 impianti idroelettrici distribuiti su 10 siti tra Piemonte e Veneto. Questi impianti, di piccola e grande derivazione, contribuiscono a coprire circa il 35% del fabbisogno energetico degli stabilimenti italiani riducendo notevolmente le emissioni annue di CO2 e contribuendo così ad un approvvigionamento sempre maggiore di energia pulita. AFV Beltrame Group è una realtà industriale multinazionale, un leader europeo affidabile e sfidante i cui prodotti sono destinati ai comparti dell’edilizia, cantieristica navale e ferroviaria, meccanica, automotive, oil & gas, energia",
+            "roles": [],
+            "requirements": [
+              "Siamo sempre alla ricerca di nuovi giovani collaboratori con background ingegneristico e non solo, da inserire all'interno della nostra realtà. Cerchiamo persone motivate, curiose e con voglia di crescere all'interno di un Gruppo che può offrire diverse opportunità, anche di mobilità intercompany."
+            ],
+            "logo": "5c21a40341ff.png",
+            "values": "La famiglia Beltrame è proprietaria del Gruppo da cinque generazioni. Insieme ad un team di management internazionale, ha saputo creare sinergie tra gli stabilimenti italiani e quelli esteri coprendo un mercato molto ampio andando a perseguire eccellenza produttiva e qualità instaurando e alimentando un equilibrio sostenibile con tutti gli stakeholders. Valori come Sostenibilità, Qualità del prodotto e dei servizi, Salute e sicurezza, Benessere e crescita dei dipendenti caratterizzano da sempre la nostra realtà.",
+            "opportunities": "La gestione delle risorse umane, come leva di sviluppo e di creazione del valore, passa attraverso la loro valorizzazione attraverso una molteplicità di azioni che l‘azienda promuove e sostiene. Viene dedicata particolare attenzione agli aspetti organizzativi e alla formazione dei dipendenti, attraverso iniziative di sviluppo professionale e crescita delle competenze distintive di ognuno. L’azienda offre un pacchetto di formazione specifica che verrà svolto nel primo anno di assunzione e include: Finance for non-financials, corso basic; 1 Corso di lingua; Yellow Belt / 5S formazione.",
+            "contacts": "AFV ACCIAIERIE BELTRAME S.P.A.\nViale della Scienza, 81 36100 Vicenza\nPh. +39 0444 967111\nmail: talent.acquisition@beltrame-group.com\nhttps://gruppobeltrame.com/\nhttps://www.linkedin.com/company/afvbeltramegroup/"
+          },
+          {
+            "key": "fincantieri",
+            "name": "Fincantieri",
+            "sector": "Metalmeccanico",
+            "description": "Fincantieri è uno dei principali complessi cantieristici al mondo, l’unico attivo in tutti i settori della navalmeccanica ad alta tecnologia. È leader nella costruzione di unità da crociera, unità per la difesa e navi da lavoro offshore. Il Gruppo si distingue per la sua lunga esperienza nello sviluppo di soluzioni subacquee, grazie alla sua struttura industriale integrata in grado di gestire e coordinare tutte le attività legate ai settori civili, della difesa e dual use, oltre che di presidiare i mercati ed internalizzare tecnologie distintive ad alto valore aggiunto. Fincantieri è inoltre leader nell’innovazione sostenibile e nella digitalizzazione del comparto navalmeccanico, essendo attiva nel campo dei sistemi navali meccatronici, elettronici e digitali, della cybersecurity, dell’intelligenza artificiale e delle soluzioni di arredamento navale e dell’offerta di servizi post-vendita, quali il supporto logistico e l’assistenza alle flotte in servizio. \nCon oltre 230 anni di storia e più di 7.000 navi costruite, Fincantieri è un player globale con una rete produttiva che comprende 18 cantieri navali in tutto il mondo e oltre 24.000 lavoratori diretti; mantiene il proprio know-how e i centri direzionali in Italia, dove impiega oltre 13.000 dipendenti e attiva circa 90.000 posti di lavoro.",
+            "roles": [],
+            "requirements": [
+              "Laurea da conseguire o conseguita da non più di 12 mesi.",
+              "Voto di laurea non inferiore a 105/110",
+              "Buona conoscenza della lingua inglese parlata e scritta.",
+              "Buona conoscenza del pacchetto Microsoft Office.",
+              "Buone doti relazionali, capacità di lavorare in squadra, capacità di analisi, di programmazione e pianificazione;  motivazione, determinazione al raggiungimento dei risultati, approccio mentale positivo."
+            ],
+            "logo": "9c89ccf6ceb7.jpg",
+            "values": "PERSONE\nLe nostre azioni sono orientate alla crescita, alla formazione e alla valorizzazione delle persone, attraverso un'attenzione quotidiana alla qualità del lavoro e dei rapporti umani.\n\nSICUREZZA\nAssicuriamo elevati livelli di sicurezza sul lavoro per garantire la salute e il benessere dei lavoratori.\n\nINTEGRITA'\nAgiamo in maniera responsabile e lavoriamo con il massimo impegno attenendoci a principi rigorosi di etica, lealtà e correttezza professionale.\n\nATTENZIONE AL CLIENTE\nSoddisfiamo le esigenze dei nostri clienti e rispettiamo rigorosamente gli impegni presi.\n\nINNOVAZIONE\nSiamo tesi verso la continua innovazione tecnologica dei prodotti e dei metodi di lavoro.",
+            "opportunities": "Le posizioni aperte e i relativi profili ricercati sono consultabili di volta in volta sul sito www.fincantieri.com, alla sezione “Persone\\Lavora con noi\\Posizioni aperte”",
+            "contacts": "FINCANTIERI S.p.A.\nCORPORATE\nVia Genova, 1\n34121 TRIESTE\n\nTel: +390403192111\n\ntalentacquisition@fincantieri.it\n\nwww.fincantieri.com\n\n\nRecruiters:\n\nSilvia DALLE GRAVE  cell. +393441803890\n(silvia.dallegrave@fincantieri.it)\n\nAlessandro TONETTO   cell. +393420674942\n(alessandro.tonetto@fincantieri.it)\n\n\nref.te amministrativo:\n\nLucia Fabris  Tel. 0403192208\n(lucia.fabris@fincantieri.it)"
+          },
+          {
+            "key": "ovs",
+            "name": "OVS",
+            "sector": "Moda",
+            "description": "OVS S.p.A. è il principale gruppo italiano di abbigliamento uomo, donna, bambino, attivo anche nei segmenti underwear, beauty e home decoration. \n\nCon una rete di oltre 2.600 negozi in Italia e all'estero, la maggior parte dei quali ad insegna OVS, Upim e Goldenpoint, il gruppo propone un’ampia gamma di brand propri tra cui PIOMBO, OVS Kids, Blukids, Stefanel, Les Copains, Shaka e CROFF.\n\nQuotato all'Euronext Milan dal 2015, il gruppo nel 2025 ha registrato vendite per 1.746 milioni di Euro e realizzato un EBITDA di 218 milioni di Euro.",
+            "roles": [],
+            "requirements": [
+              "Se stai frequentando l'ultimo anno di un percorso di laurea triennale o magistrale, se il fashion retail ti appassiona e vuoi muovere i primi passi nel mondo della moda, partecipa al nostro OVS Internship Program.",
+              "Per tutte le altre opportunità, per scoprire di cosa ti potresti occupare e cosa cerchiamo in te, visita il nostro sito careers: https://careers-ovsgroup.ovs.it/jobs.php"
+            ],
+            "logoDark": "408b6345aed3.jpg",
+            "values": "Lavorare in OVS S.p.A. è fonte di crescita, di valore e di benessere per ciascuno. L’impegno quotidiano di tutti è teso a migliorare tutto ciò che si gestisce perché il proprio contributo faccia davvero la differenza.\n\nCreiamo valore attraverso un approccio sempre concreto verso la soluzione, le necessità e la sostenibilità che mission, obiettivi, risorse e tempi impongono. Creiamo sempre ogni giorno valore per i clienti, gli stakeholder e gli azionisti attraverso piccole e grandi cose che la nostra passione ci induce a fare.\n\nScopri la nostra mission e i nostri valori: https://www.ovscorporate.it/chi-siamo/mission-e-valori",
+            "opportunities": "Se desideri vivere un’esperienza professionale motivante, in un contesto internazionale\nin continua evoluzione, dove acquisire un bagaglio di esperienze importanti nel mondo\nretail e crescere attraverso dei piani di sviluppo e formazione mirati... questa è l’azienda giusta per te: la tua crescita è il nostro successo.\n\nDal Prodotto al Digital Business, passando per le aree di staff: in OVS S.p.A. abbiamo diverse opportunità di inserimento per quanti abbiano voglia di esplorare il mondo del Fashion Retail, con uno sguardo privilegiato sui temi di sostenibilità e trasparenza.\n\nWEAR YOUR CHANCE!\nWe are your chance.",
+            "contacts": "OVS S.p.A.\nVia Terraglio 17 30174 Mestre Venezia\nSito careers: https://careers-ovsgroup.ovs.it/jobs.php\nSito corporate: https://www.ovscorporate.it/"
+          },
+          {
+            "key": "sdg-group",
+            "name": "SDG Group",
+            "sector": "Consulenza",
+            "description": "SDG Group è un’azienda internazionale di management consulting, specializzata nelle attività di Business Analytics, Corporate Performance Management e Advanced Business Solutions. La nascita di SDG Group risale al 1994. Oggi opera in più di 20 paesi ed è al servizio di oltre 500 clienti in tutto il mondo, operanti in numerosi mercati di riferimento. Con circa 2.200 dipendenti a livello globale e un fatturato stimato superiore ai 100 milioni di euro, il Gruppo sviluppa soluzioni all’avanguardia in grado di supportare le aziende nel proprio percorso di trasformazione guidato dai dati. SDG Group unisce alla profonda conoscenza delle Advanced Business Analytics l’expertise di processo per settore verticale e la padronanza delle tecnologie più recenti, inclusa l’Intelligenza Artificiale; una combinazione unica di competenze grazie alla quale le aziende possono liberare il proprio potenziale per migliorare il processo decisionale, la Governance del business e diventare organizzazioni data-driven di successo.",
+            "roles": [],
+            "requirements": [
+              "Sebbene i requisiti tecnici varino a seconda della seniority e del ruolo specifico (da Junior Data Analyst fino ad Architetti di Soluzioni ed esperti Supply Chain), SDG Group ricerca costantemente professionisti proattivi, orientati all'innovazione e dotati di eccellenti capacità di problem solving. Il candidato ideale possiede l'attitudine a decodificare ed elaborare informazioni aziendali complesse, sapendosi muovere con autonomia crescente in contesti enterprise altamente strutturati. Si richiedono una forte propensione al lavoro di squadra, l'allineamento ai valori aziendali (come l'Impegno per l'Eccellenza e l'Onestà Integrale), una buona padronanza della lingua inglese (livello minimo richiesto B1/B2) e, per la natura consulenziale del ruolo, la disponibilità a trasferte in Italia e all'estero."
+            ],
+            "logoDark": "e149064f0eaf.png",
+            "values": "Successo del cliente, redditività sostenuta, innovazione, meritocrazia, onestà integrale, lavoro di squadra, leadership responsabile e impegno per l'eccellenza sono i valori fondamentali alla base dell'azienda, mirati a creare partnership durature e a supportare la vision di un business guidato dai dati.",
+            "opportunities": "In SDG Group si ha l'opportunità di diventare esperti nel settore dei Big Data, Advanced Analytics, Intelligenza Artificiale e Corporate Performance Management, entrando a far parte di una delle società di management consulting più all'avanguardia a livello globale. Offriamo la possibilità di partecipare a complessi progetti di trasformazione guidati dai dati, sia su scala nazionale che internazionale, lavorando all'interno di team giovani, dinamici e con un'età media spesso inferiore ai 30 anni. I professionisti hanno l'occasione di sviluppare solide competenze tecniche (hard skills) sulle tecnologie leader di mercato, affiancate dalle essenziali competenze relazionali (soft skills) per guidare il cliente e gli stakeholder strategici. Il gruppo promuove una cultura fondata sulla flessibilità (modelli di lavoro ibridi), sulla formazione continua tramite percorsi di certificazione e sulla valutazione costante del potenziale e delle performance.",
+            "contacts": "SDG Consulting Italia S.p.A.\nSede Legale: Via Vitruvio 1, 20124 Milano (MI)\nAltre sedi operative principali in Italia: Verona (Viale del Lavoro, 33), Firenze.\nEmail (Sede di Verona): talent.it@sdggroup.com\nCareers & Candidature: careers.sdggroup.com\nSito Web Ufficiale: www.sdggroup.com"
+          },
+          {
+            "key": "steelco",
+            "name": "Steelco",
+            "sector": "Pharma-medicale",
+            "description": "SteelcoBelimed è un'azienda internazionale nata dall'unione di Steelco e Belimed e fa parte del Gruppo Miele.\n\nIn qualità di uno dei principali produttori mondiali di apparecchiature e sistemi per il lavaggio, la disinfezione e la sterilizzazione, SteelcoBelimed opera nei settori dell'assistenza sanitaria professionale, della ricerca scientifica e dell'industria farmaceutica, offrendo soluzioni complete e personalizzate in base alle specifiche esigenze dei propri clienti.\nPresso i nostri stabilimenti italiani di Riese Pio X (TV) e Cusano di Zoppola (PN) produciamo apparecchiature destinate alle applicazioni medicali e ai laboratori di ricerca. I siti dell'area di Treviso sono specializzati nei sistemi di lavaggio e nelle soluzioni di automazione, mentre quelli dell'area di Pordenone si concentrano sulla produzione di sterilizzatori.\nLa forte attenzione all'innovazione, unita a una profonda conoscenza dei mercati internazionali e dei requisiti normativi, ha contribuito alla continua e significativa crescita dell'azienda.",
+            "roles": [],
+            "requirements": [
+              "SteelcoBelimed crede nelle persone e nel valore del lavoro di squadra.",
+              "Accogliamo studenti e neolaureati desiderosi di crescere, entusiasti e motivati, pronti ad affrontare nuove sfide con curiosità e determinazione.",
+              "Un solido percorso accademico e una buona conoscenza della lingua inglese completano il profilo ideale del candidato."
+            ],
+            "logoDark": "4ff383d49cff.png",
+            "values": "Innovazione, customizzazione, eccellenza, affidabilità, miglioramento continuo e team working.",
+            "opportunities": "SteelcoBelimed offre un ambiente internazionale stimolante in cui potrai esprimere il tuo potenziale e sviluppare il tuo talento attraverso opportunità di apprendimento e di crescita professionale pensate per valorizzare i tuoi punti di forza e rispondere alle tue esigenze di sviluppo.\nEntrando a far parte del nostro team in Italia, sarai inserito in un contesto di lavoro giovane e dinamico, dove potrai contribuire attivamente a progetti aziendali concreti, costruendo al contempo solide basi per una carriera di successo all’interno dell’azienda.\nOffriamo opportunità per lo svolgimento di tesi di laurea, nonché tirocini curriculari ed extracurriculari rivolti a studenti di laurea triennale e magistrale, in un’ampia varietà di aree aziendali, tra cui Operations, Technology, Quality, IT/Business Process, Human Resources, Administration & Finance e Legal, HSE (Health, Safety & Environment), Sales e Marketing.",
+            "contacts": "Steelco Spa \nVia Balegante 27, 31039, Riese Pio X (TV)\ncareers@steelcogroup.com\n+39 0423 7561\nwww.steelcobelimed.com\nhttps://www.linkedin.com/company/steelcobelimed"
+          },
+          {
+            "key": "buffer-17",
+            "name": "BUFFER",
+            "sector": "",
+            "description": "",
+            "roles": [],
+            "requirements": [],
+            "buffer": true
+          }
+        ]
+      },
+      {
+        "id": "destra",
+        "label": "Destra",
+        "tone": "gray",
+        "direction": "up",
+        "arrows": "up",
+        "slot": 2,
+        "companies": [
+          {
+            "key": "sanmarco",
+            "name": "Sanmarco Informatica",
+            "sector": "Consulenza digitale",
+            "description": "Sanmarco Informatica è un'azienda IT che, dagli anni ’80 a oggi, è passata da piccola impresa ad una delle realtà leader nel settore.\n\nLe persone sono il cuore del nostro successo: nei nostri team lavorano esperti di processo, ingegneri, informatici e consulenti, ognuno dei quali ha l’opportunità di crescere in un ambiente concreto, grazie alla formazione continua e a percorsi di carriera personalizzati, indipendentemente dal livello di esperienza.\n\nMettiamo intraprendenza e ricerca dell’eccellenza in tutto ciò che facciamo, guidati dalla sensibilità verso le esigenze dei clienti e dal rispetto profondo per ogni collega e per la sua unicità.\n\nVogliamo essere protagonisti della Rivoluzione Digitale insieme a te.",
+            "roles": [],
+            "requirements": [
+              "Per ogni ruolo valorizziamo abilità diverse, con un elemento che ci guida in ogni ricerca: cerchiamo persone che si sentano realizzate quando lasciano un impatto. Se per farlo credi sia indispensabile coltivare le relazioni umane come valore aggiunto, ci piacerebbe incontrarti."
+            ],
+            "logoDark": "7dfe41093b13.png",
+            "values": "Rispetto\nTuteliamo la sensibilità e l’autostima di ogni individuo attraverso un ambiente di lavoro rispettoso e propositivo.\n\nIntraprendenza\nIncoraggiamo lo spirito d’iniziativa e la responsabilità attraverso piani di carriera strutturati che premino l’autonomia.\n\nRicerca dell’eccellenza\nForniamo strumenti di digital training continuo affinché tu possa porti traguardi ambiziosi e massimizzare il tuo potenziale.\n\nSensibilità verso il cliente\nTi facciamo lavorare su progetti concreti, per capire subito che la vera soddisfazione è creare soluzioni su misura per chi ci ha scelti.",
+            "opportunities": "Se stai completando i tuoi studi o stai per laurearti in Ingegneria Gestionale o in Economia, puoi iniziare a costruire il tuo futuro come Software Consultant o Solution Designer nei nostri ambiti di punta:\n- Produzione e Logistica;\n- Amministrazione e Controllo di Gestione;\n- Quality Performance.\n\nIl tuo percorso accademico ti ha dato basi solide, ma a fare la vera differenza saranno le tue competenze trasversali: curiosità, capacità di ascolto e spirito di iniziativa sono il vero motore della nostra innovazione.\n\nIl nostro cuore è tecnologico, ma sono le persone e la loro attitudine a guidare la crescita di ogni giorno.",
+            "contacts": "HEADQUARTER: Via Vittorio Veneto, 153, 36040 Grisignano di Zocco (VI)\nSANMARCOINFORMATICA.COM\npeople@sanmarcoinformatica.it\n@smi_people"
+          },
+          {
+            "key": "zeta",
+            "name": "Zeta Farmaceutici",
+            "sector": "Distribuzione",
+            "description": "Siamo una solida realtà industriale italiana composta da due aziende specializzate nello sviluppo, produzione e distribuzione di farmaci, cosmetici, integratori alimentari, dispositivi medici e biocidi/presidi medico chirurgici.",
+            "roles": [],
+            "requirements": [
+              "Siamo leali con le persone, diamo loro stima, incoraggiamo e premiamo il loro talento. Ma pretendiamo impegno, responsabilità e open-minded mindset."
+            ],
+            "logoDark": "d6bdec44e299.png",
+            "values": "Investiamo continuamente in innovazione tecnologica, avendo sempre come obiettivi qualità, sicurezza e il rispetto scrupoloso delle procedure certificate. Crediamo inoltre fortemente nel valore delle persone: i nostri dipendenti, che ci dedicano idee e impegno, e i nostri clienti, al centro della nostra organizzazione.",
+            "opportunities": "Offriamo un ambiente dinamico e formazione continua, perseguendo obiettivi strategici che assicurino una costante crescita, ponendo sempre al centro le persone, i clienti, la sostenibilità ambientale e la qualità del lavoro.",
+            "contacts": "www.zetafarm.it - 0444461911 - Sede: Via Galvani 10, Sandrigo (VI)"
+          },
+          {
+            "key": "gottardo",
+            "name": "Gottardo",
+            "sector": "Cosmetici",
+            "description": "Gottardo S.p.A. è l’azienda leader in Italia nella vendita di prodotti per la cura della casa, \ndella persona e di articoli di profumeria e make-up.\nCon una presenza capillare di oltre 800 punti vendita, 2 insegne e più di un milione di presenze settimanali nei negozi, rappresenta una realtà solida, dinamica e in continua crescita, con circa 40 nuove aperture l’anno. \n\nGrazie a queste caratteristiche e al particolare settore in cui opera, Gottardo S.p.A. è protagonista nella vita quotidiana delle persone.\nOgni giorno una squadra di più di 7000 collaboratori e collaboratrici lavora motivata da un unico obiettivo: la soddisfazione del Cliente.\n\nLa nostra Mission è: tutte le Persone amano prendersi cura di sé e della propria casa; Noi ci impegniamo a soddisfare con entusiasmo questo desiderio offrendo un prodotto distintivo e gratificante. \nOgni giorno lavoriamo per essere un modello di riferimento, consapevoli che ogni traguardo è un nuovo punto di partenza (Vision).",
+            "roles": [],
+            "requirements": [
+              "Gottardo S.p.A. offre l’opportunità di conoscere da vicino il contesto di un'azienda retail in costante crescita, all'interno di un ambiente giovane e dinamico dove sviluppare le proprie potenzialità. È sempre alla ricerca di talenti dotati di entusiasmo e determinazione in ottica di miglioramento continuo. Per la sede di Padova e per i negozi di tutta Italia, cerchiamo risorse che sposino i nostri valori, fondamenta della nostra identità aziendale."
+            ],
+            "logo": "cdef206d01e9.png",
+            "values": "Alla base della cultura aziendale ci sono quattro valori cardine:\nChiarezza: garantire trasparenza e velocità di trasmissione delle informazioni;\nLealtà: agire con responsabilità, valorizzando e salvaguardando il patrimonio aziendale, con attitudine di buona fede in ogni attività e decisione;\nRispetto: accorgersi, fermare la propria attenzione; ogni comportamento è volto al rispetto attraverso il saluto, la relazione, la cura di sé e degli altri;\nAppartenenza: sentirsi parte di un tutto, identificarsi in qualcosa che va oltre il singolo, che ci appartiene, entra a far parte di Noi e della nostra identità.",
+            "opportunities": "Offriamo la possibilità di entrare a far parte di una Squadra in cui mettere in campo le conoscenze maturate durante gli studi. Strutturiamo percorsi di inserimento lavorativo volti all’acquisizione di competenze attraverso programmi di sviluppo e crescita. Costruiamo un ambiente che permetta a ogni persona di esprimersi al meglio.\n\nLa formazione aziendale ha un ruolo centrale, vengono infatti proposti corsi con formatori interni ed esterni volti al trasferimento diretto ed efficace di esperienza e conoscenza. L’azienda, al passo con la digitalizzazione, offre inoltre contenuti multimediali per l’autoapprendimento all’interno di una piattaforma e-learning.\nViene dato spazio alle idee e alla creatività di ognuno, attraverso workshop multidisciplinari che mirano all’ideazione di progetti innovativi. \n\nPer la sede di Padova, si selezionano giovani laureati/e interessati/e a una crescita professionale in aree come: Acquisti, Amministrazione, Vendite, IT, Logistica, Risorse Umane, Sviluppo e Tecnico.",
+            "contacts": "È possibile consultare le posizioni aperte nella sezione Lavora con Noi del sito: www.gottardospa.it. \nSiamo curiosi/e di conoscere persone con passione per il mondo del retail, pronte a cogliere le sfide e mettersi in gioco in un'azienda solida e in forte sviluppo."
+          },
+          {
+            "key": "pillar",
+            "name": "Pillar",
+            "sector": "Edillizia",
+            "description": "Pillar è una startup nata a Milano nel 2025, fondata da Gabriel Guinea Montalvo, Paolo Tarsia Incuria e Lorenzo Demaio con una missione chiara: rimettere il controllo nelle mani di chi costruisce.\nStiamo creando il sistema operativo per l’edilizia, una piattaforma alimentata dall’AI che trasforma il back office delle imprese edili in una sala di controllo in tempo reale. Fatture, flussi di cassa, cantieri, margini e reportistica stanno tutti in un unico posto, con i dati che arrivano anche direttamente dal cantiere via WhatsApp, in linguaggio naturale.\nQualche numero, per capire la velocità: 1.250+ imprese clienti, 17.500+ cantieri, 500.000 fatture processate e €15,2M raccolti da fondi come Earlybird, Base10 ed Emblem. \nTutto in poco più di un anno.\nOggi siamo un team di oltre 100 persone, giovane, internazionale e in rapida crescita.",
+            "roles": [],
+            "requirements": [
+              "Il CV perfetto non ci interessa. Ci interessi tu: la tua personalità, il tuo carisma, la tua curiosità. Cerchiamo persone proattive, che amano lavorare in squadra e affrontano ogni sfida con la mente aperta! Ci piacciono le persone flessibili, che imparano in fretta e non si fermano davanti a un problema mai visto prima.",
+              "Cerchiamo chi prende l’iniziativa senza aspettare che qualcuno gli dica cosa fare e affronta le difficoltà con energia e determinazione, invece di scoraggiarsi. Conta molto anche l’onestà: con gli altri, e con sé stessi quando si sbaglia. In Pillar, la cultura del feedback è una costante del nostro lavoro.",
+              "Per i ruoli commerciali apprezziamo in particolare ottime capacità di comunicazione, con una forte coachability e predisposizione al risultato, insieme alla voglia di misurarsi ogni giorno con clienti veri. Una laurea in Economia o Ingegneria Gestionale è un’ottima base di partenza, ma quello che ci interessa davvero sei tu: ciò che hai fatto, costruito e imparato, dentro e fuori dall’università."
+            ],
+            "logoDark": "911e9467363c.png",
+            "values": "L’edilizia non è un settore come gli altri. Strade, case, scuole e ospedali esistono perché qualcuno li costruisce. Eppure chi costruisce lavora ancora con strumenti frammentati, flussi di cassa fragili e decisioni prese senza dati.\n\nLa nostra missione è sistemare questo problema alla radice. Vogliamo farlo costruendo il sistema operativo e finanziario che l’edilizia non ha mai avuto: un unico posto dove amministrazione, cantiere, finanza e decisioni lavorano insieme. Immaginiamo un futuro in cui ogni impresa edile cresce con chiarezza e solidità, senza vivere in emergenza continua.\n\nIl nostro team si riconosce in tre valori:\n1. High IQ: impariamo in fretta, risolviamo problemi nuovi senza un manuale e colleghiamo i punti tra ambiti diversi.\n2. High Energy: prendiamo l’iniziativa, ci muoviamo senza aspettare istruzioni e troviamo una strada anche quando non è tracciata.\n3. High Integrity: siamo onesti sui nostri errori e sui nostri limiti, e accogliamo i feedback senza metterci sulla difensiva.\n\nProrsum Semper. Sempre avanti.",
+            "opportunities": "Da noi non esistono ruoli statici: ognuno ha ownership reale fin dal primo giorno e la possibilità di imparare sul campo in tantissimi ambiti, dal tech e dal product fino alle strategie di vendita più attuali e concrete. Lavoriamo in modo veloce, smart e orientato ai risultati, con standard alti e tanto spazio per sperimentare.\nCerchiamo persone che non vogliano semplicemente ricoprire un ruolo, ma contribuire a costruire qualcosa. Persone curiose, ambiziose e proattive, che abbiano voglia di mettersi in gioco, portare idee, assumersi responsabilità e vedere concretamente l'impatto del proprio lavoro sulla crescita dell'azienda. In Pillar lavorerai a stretto contatto con il team e con la leadership, in un contesto in cui le idee possono trasformarsi rapidamente in azioni e il contributo di ciascuno conta davvero. Non sarai un numero in un'organizzazione, ma parte attiva di un progetto in piena evoluzione, con l'opportunità di crescere insieme all'azienda e contribuire a definirne il futuro.\nSe cerchi un ambiente internazionale, in cui imparare, avere responsabilità reali e fare la differenza, potresti trovare in Pillar il posto giusto per costruire il tuo prossimo capitolo.",
+            "contacts": "Sede Legale: Via Francesco Olgiati 26, 20143, Milano (MI)\nSede Operativa: Via Francesco Olgiati 26, 20143, Milano (MI)\nCostantino Lisi, Team Leader BDR outbound - costantino@pillar.it\nBenedetta Giovinazzo, Talent Acquisition Partner - benedetta.giovinazzo@pillar.it\nhttps://www.pillar.it/"
+          },
+          {
+            "key": "veronesi",
+            "name": "Veronesi Group",
+            "sector": "Agroalimentare",
+            "description": "Il Gruppo Veronesi fondato a Verona nel 1958 da Apollinare Veronesi è oggi uno dei principali protagonisti dell'industria agroalimentare italiana. Con oltre 8.000 collaboratori e una presenza in circa 80 Paesi è un grande gruppo che presidia l'intera filiera agroalimentare, dalla produzione di mangimi alla produzione e trasformazione delle carni. Veronesi, specializzato nell'alimentazione zootecnica, AIA punto di riferimento nel settore delle carni avicole e uova, Negroni storico marchio della salumeria italiana.",
+            "roles": [],
+            "requirements": [
+              "Ci rivolgiamo a laureandi e neolaureati provenienti da diversi percorsi di studio, in particolare in ambito economico, ingegneristico, scientifico e agroalimentare. Valorizziamo responsabilità, proattività, approccio pragmatico, visione d'insieme e capacità relazionali. Cerchiamo persone che vogliono sviluppare le proprie competenze e intraprendere un percorso di crescita."
+            ],
+            "logo": "e0f402d96bea.jpg",
+            "values": "Qualità, passione e innovazione sono alla base del nostro modo di lavorare. Valorizziamo la collaborazione e lo spirito di gruppo, con una attenzione al miglioramento continuo e all'eccellenza. La sostenibilità è parte integrante del nostro impegno verso il futuro.",
+            "opportunities": "Il Gruppo Veronesi offre stage curriculari, extracurriculari e progetti di tesi, finalizzati a un possibile inserimento in azienda. Le opportunità riguardano diverse aree, tra cui Operations, Supply Chain, Controlling e Sales. Sono previsti percorsi di formazione e affiancamento per sviluppare nuove competenze e costruire il proprio futuro professionale all'interno di un Gruppo solido, dinamico e in continua evoluzione.",
+            "contacts": "Gruppo Veronesi\nVia Valpantena 18/G\nQuinto di Valpantena (VR)\nwww.gruppoveronesi.it"
+          },
+          {
+            "key": "aspiag",
+            "name": "Aspiag",
+            "sector": "GDO",
+            "description": "Aspiag Service S.r.l. (Despar Nord) è concessionaria del marchio Despar nel Triveneto, Emilia Romagna e Lombardia e conta ad oggi oltre 9.000 dipendenti.\nNella nostra area di attività gestiamo filiali dirette a insegna Despar, Eurospar e Interspar e riforniamo centinaia di dettaglianti associati.\nFacciamo parte del gruppo SPAR Austria, la più grande realtà territoriale all’interno di SPAR International, assieme alle concessionarie SPAR di Austria, Slovenia, Croazia e Ungheria.\nCon il nostro lavoro di ogni giorno contribuiamo a fare del marchio con l’abete il brand retail più diffuso al mondo, presente in quattro continenti e in ben 48 Paesi.\nPer la sesta volta, i nostri punti vendita hanno ottenuto il riconoscimento “Insegna dell’anno” nella categoria Supermercati, a conferma del nostro impegno per la qualità e la soddisfazione della clientela che ci sceglie ogni giorno.\nAbbiamo inoltre conseguito la Certificazione di parità di genere, un primo traguardo che testimonia il nostro impegno e la nostra attenzione nella promozione di un ambiente di lavoro inclusivo e rispettoso per tutte le persone che lavorano con noi.",
+            "roles": [],
+            "requirements": [
+              "Aspiag Service - Despar Nord ricerca candidati/e, laureandi/e e laureati/e che siano dotati di spirito di iniziativa, entusiasmo e ottime capacità relazionali.",
+              "In linea con i valori aziendali, i candidati e le candidate ideali sono orientati all'innovazione e al lavoro di squadra.",
+              "Completano il profilo ideale un buon percorso accademico e padronanza del Pacchetto Office.",
+              "Il contesto internazionale nel quale opera Aspiag Service, rende la conoscenza della lingua inglese (almeno a livello intermedio) e/o della lingua tedesca un requisito preferenziale."
+            ],
+            "logoDark": "1c54470b3f28.png",
+            "values": "L’operatività dell’azienda è orientata ai quattro valori di riferimento, individuati insieme al management e condivisi con i collaboratori: attenzione al cliente, innovazione, sviluppo delle persone, sostenibilità",
+            "opportunities": "Offriamo l’opportunità di lavorare in un’azienda leader della GDO, in un ambiente di respiro internazionale, attenta ed orientata alla crescita e allo sviluppo delle proprie risorse, grazie a diverse tipologie contrattuali: stage, assunzioni, percorsi di sviluppo interni.\nLe aree dove vengono offerte nuove opportunità sono: \n\n        • business process management,\n        • supply chain, \n        • ICT - sistemi informativi, \n        • direzione vendite,\n        • amministrazione e controllo di gestione, \n        • marketing,  \n        • acquisti, \n        • risorse umane.  \n\nOffriamo inoltre opportunità lavorative all’interno dell’area Logistica e Vendite, che permettono a laureandi/e e laureati/e di mettersi alla prova ”sul campo”, partecipando a percorsi di sviluppo e crescita professionale.\nPer chi desidera affiancare un’esperienza lavorativa al percorso di studi, offriamo l’opportunità di lavorare durante il week end all’interno dei nostri supermercati.\nConsultate le posizioni aperte all’interno del modulo Lavora con Noi sul nostro sito Despar:   https://www.despar.it/it/lavora-con-noi/",
+            "contacts": "selezione_sedi@despar.it\n Le posizioni aperte sono visibili nel sito  https://www.despar.it/it/lavora-con-noi/\nPer candidarsi è necessario compilare il form online nella sezione “Lavora con noi”."
+          },
+          {
+            "key": "frigo-system",
+            "name": "Frigo System",
+            "sector": "Refrigerazione industriale",
+            "description": "Fondato nel 1981, il Gruppo nasce e si sviluppa dalla profonda sinergia tra SICAF e FRIGO SYSTEM.\n\nLa prima è un’azienda a vocazione produttiva con una presenza internazionale sul mercato che propone prodotti della migliore manifattura; la seconda è un importante distributore di componenti con diverse filiali in Italia e Austria. Entrambe si sono posionate tra i leader del settore della Refrigerazione Commerciale e Industriale.",
+            "roles": [],
+            "requirements": [
+              "Laurea (o laureandi) Magistrale in Ingegneria Gestionale, Marketing, Scienze della Comunicazione o Economia."
+            ],
+            "logo": "4fd561708251.jpg",
+            "values": "Per noi la FIDUCIA è un elemento fondamentale per lo sviluppo della persona e del Gruppo e garanzia di sano rapporto tra le persone. Manteniamo la parola data e facciamo sì che quella ricevuta venga mantenuta.\n        \nPer noi del Gruppo il RISPETTO è alla base di tutte le relazioni che generano fiducia tra le persone. Per noi il rispetto significa condividere e seguire le regole che ci siamo dati ed essere disponibili a condividere la nostra professionalità e il nostro punto di vista per trovare soluzioni migliorative che accrescano il valore dell'altro.                        \n\nPer noi EVOLUZIONE significa essere punto di riferimento del mercato mantenendo alta la garanzia di qualità, trasparenza e serietà con soluzioni funzionali al mercato di riferimento. Facciamo innovazione e ricerca con entusiasmo e grazie alla nostra curiosità generiamo scambio di conoscenze e competenze tanto all'interno del Gruppo quanto con l'esterno.",
+            "opportunities": "Il Jr. Marketing Manager ha la responsabilità di supportare la Direzione a sviluppare la notorietà del brand, posizionare l'azienda come punto di riferimento del settore e generare opportunità di valore per la rete commerciale. Assiste alla pianificazione e gestione di campagne di comunicazione integrate, di eventi e fiere di settore, al presidio e sviluppo dei canali digitali e alla realizzazione di ricerche di mercato. Contribuisce allo sviluppo di strumenti di lead generation e sales enablement, incluso il CRM. Partecipa alle strategie di lancio dei nuovi prodotti e servizi.",
+            "contacts": "Ufficio del Personale - personale@frigosystem.com"
+          },
+          {
+            "key": "relex",
+            "name": "Relex Solutions",
+            "sector": "Start-up",
+            "description": "RELEX Solutions offre una piattaforma unificata di pianificazione della supply chain, basata su algoritmi di AI, per produttori, retailer e distributori. Li aiutiamo a prevedere la domanda, pianificare la produzione e avere i prodotti giusti al posto giusto, dalle materie prime ai prodotti finiti. Pianificare meglio significa avere meno sprechi e meno emissioni, quindi il nostro lavoro ha un impatto reale e misurabile. Con radici nordiche e una visione globale, oltre 2.300 RELEXians (così ci piace chiamarci) supportano ogni giorno più di 600 clienti in più di 20 uffici in tutto il mondo.",
+            "roles": [],
+            "requirements": [
+              "Accogliamo studenti e neolaureati di qualsiasi background che mostrino curiosità e attitudine analitica. Economia, ingegneria, statistica e discipline scientifiche sono punti di partenza comuni, ma non gli unici. Quello che conta: inglese fluente, lavoro di squadra, attenzione al dettaglio, voglia di imparare e interesse a lavorare con i clienti. Non serve conoscere il nostro software: ti formiamo noi."
+            ],
+            "logoDark": "f0fc67aa4dcf.png",
+            "values": "I nostri cinque valori-cardine guidano il modo in cui lavoriamo: Customer is a friend, Colleague is a friend, We deliver measurable value, Put an end to stupid things e Life is supposed to be fun. In breve: siamo onesti e corretti con clienti e colleghi, ci concentriamo sul valore misurabile e continuiamo a migliorarci. Prendiamo sul serio la qualità del nostro lavoro, senza prenderci troppo sul serio.",
+            "opportunities": "Sii parte del futuro. Sii RELEXian.\nCome neolaureato, in RELEX entri in un team di consulenza e lavori su progetti reali per clienti internazionali, dal manufacturing al retail. Ricevi una formazione strutturata, il supporto di colleghi esperti e vere responsabilità fin dai primi mesi. Svilupperai competenze analitiche, di problem solving e di project management e potrai crescere verso l’analisi dei dati o la consulenza tecnica, di business o di implementazione, sempre in ambito supply chain. Passa da noi per chiedere delle posizioni aperte e di come si svolge una giornata di consulenza.",
+            "contacts": "RELEX Solutions Italia\nVia delle Industrie 15 30175 Marghera (VE)\nVia Energy Park 6 20871 Vimercate (MB)\nMassimiliano Dauros - Head of Value Development Consulting massimiliano.dauros@relexsolutions.com\nEva Pereira - Talent Acquisition Partner\neva.pereira@relexsolutions.com\nwww.relex.com\nLinkedIn: linkedin.com/company/relexsolutions \nInstagram: @lifeatrelex"
+          },
+          {
+            "key": "buffer-26",
+            "name": "BUFFER",
+            "sector": "",
+            "description": "",
+            "roles": [],
+            "requirements": [],
+            "buffer": true
+          }
+        ]
+      }
+    ],
+    "display": {
+      "mapSize": "fit",
+      "panelSize": "standard",
+      "publicUrl": "http://becomingmanager.com"
+    },
+    "flow": [
+      "sinistra",
+      "centro",
+      "destra"
+    ],
+    "entranceSlot": 1
+  }
+}
