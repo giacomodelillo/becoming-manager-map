@@ -1,7 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { TransformComponent, TransformWrapper, useControls } from "react-zoom-pan-pinch";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
 import { cn } from "@/lib/utils";
 import { BASE_NAME_PX } from "@/lib/expo/display";
 import { useExpoState } from "@/lib/expo/store";
@@ -35,12 +45,6 @@ function Viewport({ children, overlay, refitKey, minTextPx = 0 }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
 
-  /**
-   * Vista iniziale. Con minTextPx = 0 la mappa si adatta tutta al contenitore.
-   * Altrimenti lo zoom non scende sotto quello che dà testi della grandezza richiesta:
-   * la mappa può uscire dallo schermo e si ancora in basso a sinistra, dall'Ingresso.
-   * `all` = ignora il minimo e mostra tutta la mappa (pulsante dei controlli).
-   */
   const fit = useCallback((animationMs = 0, all = false) => {
     const box = containerRef.current;
     const content = contentRef.current;
@@ -58,7 +62,8 @@ function Viewport({ children, overlay, refitKey, minTextPx = 0 }: Props) {
 
     const fitScale = Math.min((cw - SIDE_PAD * 2) / mw, freeH / mh);
     const base = Math.min(Math.max(fitScale, 0.35), 1.2);
-    const floor = !all && minRef.current > 0 ? minRef.current / BASE_NAME_PX : 0;
+    const floor =
+      !all && minRef.current > 0 ? minRef.current / BASE_NAME_PX : 0;
 
     let scale = base;
     let x = (cw - mw * base) / 2;
@@ -66,14 +71,16 @@ function Viewport({ children, overlay, refitKey, minTextPx = 0 }: Props) {
     if (floor > base) {
       scale = Math.min(floor, 4);
       x = mw * scale <= cw ? (cw - mw * scale) / 2 : SIDE_PAD;
-      y = mh * scale <= freeH ? padTop + (freeH - mh * scale) / 2 : ch - padBottom - mh * scale;
+      y =
+        mh * scale <= freeH
+          ? padTop + (freeH - mh * scale) / 2
+          : ch - padBottom - mh * scale;
     }
 
     controlsRef.current.setTransform(x, y, scale, animationMs, "easeOut");
     setReady(true);
   }, []);
 
-  // Si riadatta quando cambia la dimensione dello stage (es. colonna dettaglio che apre/chiude)
   useEffect(() => {
     const box = containerRef.current;
     if (!box) return;
@@ -82,7 +89,6 @@ function Viewport({ children, overlay, refitKey, minTextPx = 0 }: Props) {
     return () => observer.disconnect();
   }, [fit]);
 
-  // ...quando cambia la forma della mappa o la grandezza scelta in area riservata, e dopo un reset del totem
   useEffect(() => {
     const id = requestAnimationFrame(() => fit(0));
     return () => cancelAnimationFrame(id);
